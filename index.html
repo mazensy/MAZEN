@@ -1,446 +1,325 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAZEN | خدمات السوشيال ميديا</title>
+
 <style>
-:root{
-  --bg:#071022;
-  --card:#071622;
-  --muted:#9aa6b2;
-  --accent1:#2B6CB0;
-  --accent2:#6B46C1;
-  --accent-grad: linear-gradient(90deg,var(--accent1),var(--accent2));
-  --accent-cta:#FFD166;
-  --success:#25D366;
+body {
+    font-family: "Tajawal", sans-serif;
+    background: #0a0f1a;
+    color: white;
+    margin: 0;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;font-family:"Tajawal",system-ui,Segoe UI,Roboto,Arial;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(43,108,176,0.06), transparent),
-              radial-gradient(1000px 400px at 90% 90%, rgba(107,70,193,0.04), transparent),
-              var(--bg);
-  color:#e6eefb;
+
+/* HEADER */
+header {
+    background: #0d1626;
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.1)
 }
-header{
-  display:flex;align-items:center;gap:16px;padding:18px 20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));
-  border-bottom:1px solid rgba(255,255,255,0.03);
-  position:sticky;top:0;z-index:90;
+
+/* SEARCH / FILTERS */
+.controls {
+    width: 95%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
-.logo{display:flex;align-items:center;gap:12px}
-.logo .symbol{
-  width:52px;height:52px;border-radius:10px;
-  background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:22px;
-  box-shadow:0 6px 20px rgba(43,108,176,0.18), 0 2px 6px rgba(11,22,40,0.6);
+
+input, select {
+    background: #0f1a2c;
+    border: 1px solid #1f2d44;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    flex: 1;
 }
-header .brand {font-size:18px;font-weight:700}
-header .tag {font-size:12px;color:var(--muted)}
-.container{max-width:1150px;margin:20px auto;padding:0 18px}
-.hero{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
-.hero .left h1{margin:0;font-size:22px}
-.hero .left p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
-.controls{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-input[type="text"], input[type="number"], select {
-  width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);
-  background:transparent;color:inherit;font-size:14px;
+
+/* CATEGORY TABS */
+.tabs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px;
+    width: 95%;
+    margin: auto;
 }
-button.btn{background:var(--accent1);border:none;color:#fff;padding:10px 14px;border-radius:8px;cursor:pointer}
-button.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06)}
-.grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px}
-@media(max-width:980px){ .grid{grid-template-columns:1fr} .aside{order:2} }
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.service-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-              border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);}
-.service-card h4{margin:0 0 8px 0}
-.meta{color:var(--muted);font-size:13px;margin-bottom:8px}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.badge{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
-.price{font-weight:700;color:var(--accent-cta);font-size:18px}
-.price small{display:block;color:var(--muted);font-weight:400;font-size:12px}
-.actions{display:flex;gap:8px;margin-top:10px}
-.wa-btn{background:var(--success);color:#012; padding:9px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block}
-.details-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px;border-radius:8px}
-.filters-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.tabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-.tab{padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)}
-.tab.active{background:var(--accent-grad);color:#fff;box-shadow:0 8px 24px rgba(43,108,176,0.12)}
-.aside .card{position:sticky;top:86px}
-footer{margin:28px 0;text-align:center;color:var(--muted);font-size:13px}
-.small{font-size:12px;color:var(--muted)}
-.pill{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
-.qty-row{display:flex;gap:8px;align-items:center;margin-top:8px}
-.qty-row input{width:120px}
+
+.tab {
+    padding: 10px 18px;
+    background: #0f1a2c;
+    border: 1px solid #1f2d44;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.tab.active {
+    background: #2b6cb0;
+}
+
+/* SERVICES GRID */
+.services {
+    width: 95%;
+    max-width: 900px;
+    margin: auto;
+    margin-top: 20px;
+    display: grid;
+    gap: 12px;
+}
+
+.card {
+    background: #0f1a2c;
+    border: 1px solid #1f2d44;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-desc {
+    color: #9aa6b2;
+    margin: 8px 0;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.wa-btn {
+    padding: 8px 15px;
+    background: #2b6cb0;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* MODAL (ORDER FORM) */
+#orderModal {
+  position:fixed; inset:0; backdrop-filter:blur(6px);
+  background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:9999;
+}
+
+.modal-box {
+  width:95%; max-width:420px; background:#0b1524; color:#fff;
+  padding:22px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);
+}
+
+.modal-box input, .modal-box textarea {
+    width: 100%;
+    margin-top: 10px;
+}
+
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">
-    <div class="symbol">M</div>
-    <div>
-      <div class="brand">MAZEN</div>
-      <div class="tag">خدمات تسويق رقمي — طلب عبر واتساب</div>
-    </div>
-  </div>
-  <div style="margin-left:auto;text-align:left">
-    <div class="small">واتساب: <strong>+963 980 962 294</strong></div>
-  </div>
-</header>
 
-<div class="container">
-  <div class="hero">
-    <div class="left">
-      <h1>خدمات السوشيال — MAZEN </h1>
-      <p></p>
-    </div>
-    <div style="min-width:260px">
-      <div class="card small">
-        <div>سعر الصرف (USD → SYP)</div>
-        <div style="margin-top:8px;display:flex;gap:8px">
-          <input type="number" id="usdRate" value="11060" />
-          <button class="btn" id="updateRate">تحديث</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<header>MAZEN | خدمات السوشيال ميديا</header>
 
-  <div class="controls">
-    <div class="card" style="min-width:300px">
-      <label class="small">بحث</label>
-      <input type="text" id="searchInput" placeholder="ابحث بعنوان الخدمة أو الوصف أو الفئة" />
-    </div>
-
-    <div class="card" style="width:170px">
-      <label class="small">اللغة</label>
-      <select id="langFilter">
-        <option value="all">الكل</option>
-        <option value="arabic">عربي</option>
-        <option value="foreign">أجنبي</option>
-      </select>
-    </div>
-
-    <div class="card" style="width:220px">
-      <label class="small">نطاق السعر (بالليرة السورية)</label>
-      <div style="display:flex;gap:8px">
-        <input type="number" id="minSYP" placeholder="أدنى" />
-        <input type="number" id="maxSYP" placeholder="أعلى" />
-      </div>
-    </div>
-
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="btn" id="applyBtn">تطبيق</button>
-      <button class="btn secondary" id="resetBtn">إعادة</button>
-    </div>
-  </div>
-
-  <div class="tabs" id="categoryTabs"></div>
-
-  <div class="grid">
-    <main>
-      <div id="servicesContainer" class="cards"></div>
-    </main>
-
-    <aside class="aside">
-      <div class="card">
-        <h4>معلومات سريعة</h4>
-        <p class="small"></p>
-        <p class="small">مرتاح نفسيا اليوم ؟</p>
-      </div>
-
-      <div style="height:12px"></div>
-
-      <div class="card">
-        <h4>أدوات</h4>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button class="pill" onclick="exportServices()">تصدير JSON</button>
-          <button class="pill" onclick="importServices()">استيراد JSON</button>
-        </div>
-        <div style="margin-top:12px" class="small">فرز سريع</div>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button class="pill" onclick="sortBy('price_asc')">الأرخص</button>
-          <button class="pill" onclick="sortBy('price_desc')">الأغلى</button>
-          <button class="pill" onclick="sortBy('title')">الاسم</button>
-        </div>
-        <div style="margin-top:12px">
-          <a href="contact.html" class="pill">اتصل بنا</a>
-          <a href="privacy.html" class="pill">سياسة الخصوصية</a>
-        </div>
-      </div>
-    </aside>
-  </div>
-
-  <footer>© MAZEN — صفحة خدمات. تواصل: +963980962294</footer>
+<!-- FILTERS -->
+<div class="controls">
+    <input type="text" id="search" placeholder="ابحث عن خدمة…" oninput="render()">
+    <select id="typeFilter" onchange="render()">
+        <option value="all">عربي + أجنبي</option>
+        <option value="arabic">عربي فقط</option>
+        <option value="foreign">أجنبي فقط</option>
+    </select>
+    <input type="number" id="maxPrice" placeholder="أقصى سعر بالليرة السورية" oninput="render()">
 </div>
 
+<!-- TABS -->
+<div class="tabs">
+    <div class="tab active" onclick="switchTab('facebook')">فيسبوك</div>
+    <div class="tab" onclick="switchTab('instagram')">إنستغرام</div>
+    <div class="tab" onclick="switchTab('tiktok')">تيك توك</div>
+    <div class="tab" onclick="switchTab('youtube')">يوتيوب</div>
+</div>
+
+<!-- SERVICES LIST -->
+<div class="services" id="servicesList"></div>
+
 <!-- ORDER MODAL -->
-<div id="orderModal" style="position:fixed; inset:0; backdrop-filter:blur(6px); background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:9999;">
-  <div style="width:95%; max-width:520px; background:#0b1524; color:#fff; padding:22px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);">
+<div id="orderModal">
+  <div class="modal-box">
     <h3>طلب الخدمة</h3>
-    <p id="orderServiceTitle" style="color:#9aa6b2; margin-top:-8px;"></p>
+    <p id="orderServiceTitle" style="color:#9aa6b2"></p>
 
-    <div style="display:flex; flex-direction:column; gap:12px; margin-top:12px">
-      <input id="orderQty" type="number" min="1" value="1000" placeholder="الكمية (مثال: 1000)" />
-      <div class="qty-row small"><div>السعر لكل 1000 (USD):</div><input id="pricePerThousand" type="number" step="0.001" value="1.0" /></div>
-      <div class="small">المبلغ الإجمالي بالليرة السورية: <strong id="orderTotal">0 ل.س</strong></div>
-
-      <input id="orderName" type="text" placeholder="اسمك" />
-      <input id="orderPhone" type="text" placeholder="رقم الهاتف / واتساب" />
-      <input id="orderLink" type="text" placeholder="رابط الحساب / المنشور" />
-      <textarea id="orderNotes" placeholder="ملاحظات إضافية" style="min-height:80px"></textarea>
-    </div>
+    <input id="orderName" type="text" placeholder="اسمك">
+    <input id="orderPhone" type="text" placeholder="رقم الهاتف / واتساب">
+    <input id="orderLink" type="text" placeholder="رابط الحساب / المنشور">
+    <textarea id="orderNotes" placeholder="ملاحظات إضافية" style="min-height:80px"></textarea>
 
     <div style="display:flex; gap:10px; margin-top:18px">
-      <button onclick="submitOrder()" style="flex:1; padding:10px; background:#2B6CB0; color:white; border:none; border-radius:8px; cursor:pointer;">إرسال الطلب</button>
+      <button onclick="submitOrder()" style="flex:1; padding:10px; background:#2B6CB0; color:white; border:none; border-radius:8px; cursor:pointer;">إرسال</button>
       <button onclick="closeOrder()" style="width:90px; padding:10px; background:transparent; border:1px solid #445; border-radius:8px; color:#9aa6b2; cursor:pointer;">إلغاء</button>
     </div>
   </div>
 </div>
 
 <script>
-/* WA number */
-const WA_NUMBER = '963980962294';
-let USD_TO_SYP = Number(document.getElementById('usdRate').value) || 11060;
+/* واتساب */
+const WA_NUMBER = "963980962294";
 
-document.getElementById('updateRate').addEventListener('click', ()=>{
-  USD_TO_SYP = Number(document.getElementById('usdRate').value) || USD_TO_SYP;
-  renderList(currentList);
-});
+/* أسعار — دولار إلى ليرة سورية */
+function usdToSyp(v) { return Math.round(v * 14500); }
 
-/* Services data (embedded) */
-let services = [
-  /* FACEBOOK AR */
-  {id:'fb_ar_1', platform:'facebook', title:'متابعين صفحة فيسبوك | عربي', desc:'🎯 100% حسابات عربية • بدء 0-6 ساعة • ضمان 30 يوم', price_usd:1.5, language:'arabic', notes:''},
-  {id:'fb_ar_2', platform:'facebook', title:'إعجابات منشور فيسبوك | عربي', desc:'رمز 👍 + ❤️ + 🥰 • سرعة 1k/يوم • ضمان 30 يوم', price_usd:1.1346, language:'arabic', notes:''},
-  {id:'fb_ar_3', platform:'facebook', title:'تعليقات مخصصة فيسبوك | عربي', desc:'تعليقات عربية مُصممة • بدء 0-24 ساعة', price_usd:10.312, language:'arabic', notes:''},
-  {id:'fb_ar_4', platform:'facebook', title:'تقييم صفحة فيسبوك ⭐5', desc:'مخصصة • 100% حسابات مصرية • سرعة 1k/يوم', price_usd:3.15, language:'arabic', notes:''},
-  {id:'fb_ar_5', platform:'facebook', title:'أعضاء جروب فيسبوك | عربي', desc:'🎯 100% مصريين • بدء 24-48 ساعة • ضمان 30 يوم', price_usd:2.64, language:'arabic', notes:''},
+/* الخدمات */
+const services = [
 
-  /* FACEBOOK FOREIGN */
-  {id:'fb_en_1', platform:'facebook', title:'متابعين فيسبوك — أجنبي', desc:'خيارات: 1k=2500 | 5k=12500 | 10k=25000', price_usd:2.5, language:'foreign', notes:''},
-  {id:'fb_en_2', platform:'facebook', title:'أعضاء جروبات فيس بوك — عالمي', desc:'حد أقصى 500K • فوري • تعويض 30 يوم', price_usd:0.6, language:'foreign', notes:''},
-  {id:'fb_en_3', platform:'facebook', title:'لايكات فيسبوك — أجنبي', desc:'5K-10K يوميًا • فوري', price_usd:0.31, language:'foreign', notes:''},
-  {id:'fb_en_4', platform:'facebook', title:'مشاهدات ريلز/فيديو فيسبوك', desc:'سرعة 10k يوميًا • تعويض مدى الحياة', price_usd:0.05, language:'foreign', notes:''},
+/* ==================== FACEBOOK ARABIC ==================== */
+{
+    id:"fa1", platform:"facebook", type:"arabic",
+    title:"متابعين صفحة فيسبوك — عربي",
+    desc:"100% حسابات عربية | بدء فوري | ضمان 30 يوم",
+    price_usd:1.5
+},
+{
+    id:"fa2", platform:"facebook", type:"arabic",
+    title:"إعجابات منشور — عربي",
+    desc:"لايكات عربية متنوعة 👍❤️🥰",
+    price_usd:1.13
+},
 
-  /* INSTAGRAM */
-  {id:'ig_en_1', platform:'instagram', title:'متابعين إنستغرام — جودة عالية', desc:'⚡ البدء 0-24 ساعة • سرعة 10k يوميًا • تعويض 60 يوم', price_usd:1.4, language:'foreign', notes:''},
-  {id:'ig_en_2', platform:'instagram', title:'لايكات إنستغرام — حسابات قديمة', desc:'الحد الأقصى 50k • 10k يوميًا', price_usd:0.55, language:'foreign', notes:''},
-  {id:'ig_en_3', platform:'instagram', title:'مشاهدات إنستغرام (ريلز/فيديو)', desc:'20K–40K في الساعة • بدون نقصان', price_usd:0.07, language:'foreign', notes:''},
-  {id:'ig_ar_1', platform:'instagram', title:'تصميم منشورات انستاغرام', desc:'حزمة تصميم 10 منشورات • ملف PSD', price_usd:40, language:'arabic', notes:''},
+/* ==================== FACEBOOK FOREIGN ==================== */
+{
+    id:"ff1", platform:"facebook", type:"foreign",
+    title:"متابعين فيسبوك — أجنبي",
+    desc:"جودة ممتازة | حد أقصى 25K",
+    price_usd:2.5
+},
+{
+    id:"ff2", platform:"facebook", type:"foreign",
+    title:"لايكات فيسبوك — أجنبي",
+    desc:"5K - 10K يوميًا | بدء فوري",
+    price_usd:0.31
+},
 
-  /* TIKTOK */
-  {id:'tk_en_1', platform:'tiktok', title:'متابعين تيك توك', desc:'جودة ممتازة • بدء سريع', price_usd:1.2, language:'foreign', notes:''},
+/* ==================== INSTAGRAM ==================== */
+{
+    id:"ig1", platform:"instagram", type:"foreign",
+    title:"متابعين إنستغرام — جودة عالية",
+    desc:"سرعة 10K يوميًا | تعويض 60 يوم",
+    price_usd:1.4
+},
+{
+    id:"ig2", platform:"instagram", type:"foreign",
+    title:"مشاهدات إنستغرام",
+    desc:"20K – 40K في الساعة | بدون نقصان",
+    price_usd:0.07
+},
 
-  /* YOUTUBE */
-  {id:'yt_en_1', platform:'youtube', title:'مشاهدات يوتيوب', desc:'مشاهدات ثابتة • مدة كاملة', price_usd:1.5, language:'foreign', notes:''},
+/* ==================== TIKTOK ==================== */
+{
+    id:"tk1", platform:"tiktok", type:"foreign",
+    title:"متابعين تيك توك",
+    desc:"جودة ممتازة | بدء سريع",
+    price_usd:1.2
+},
 
-  /* SNAPCHAT */
-  {id:'sc_en_1', platform:'snapchat', title:'متابعين سناب شات', desc:'خدمة ترويج سناب • خيارات متعددة', price_usd:1.8, language:'foreign', notes:''},
+/* ==================== YOUTUBE ==================== */
+{
+    id:"yt1", platform:"youtube", type:"foreign",
+    title:"مشاهدات يوتيوب",
+    desc:"مشاهدات ثابتة | مدة كاملة",
+    price_usd:1.5
+},
 
-  /* TWITTER/X */
-  {id:'tw_en_1', platform:'twitter', title:'متابعين تويتر (X)', desc:'زيادة متابعين وجودة متوسطة', price_usd:1.1, language:'foreign', notes:''},
-
-  /* TELEGRAM */
-  {id:'tg_en_1', platform:'telegram', title:'أعضاء قناة تيليجرام', desc:'أعضاء نشطين • خيارات متعددة', price_usd:0.9, language:'foreign', notes:''}
 ];
 
-let categories = [];
-let currentList = [];
-let activeCategory = 'facebook';
+/* STATE */
+let currentTab = "facebook";
 
-function buildCategoryTabs(){
-  categories = Array.from(new Set(services.map(s=>s.platform)));
-  const tabs = document.getElementById('categoryTabs');
-  tabs.innerHTML = '';
-  const order = ['facebook','instagram','tiktok','youtube','snapchat','twitter','telegram'];
-  order.forEach(cat=>{
-    if(!categories.includes(cat)) return;
-    const b = document.createElement('button');
-    b.className = 'tab' + (cat===activeCategory ? ' active' : '');
-    b.dataset.cat = cat;
-    b.textContent = cat === 'facebook' ? 'فيسبوك' :
-                    cat === 'instagram' ? 'إنستغرام' :
-                    cat === 'tiktok' ? 'تيك توك' :
-                    cat === 'youtube' ? 'يوتيوب' :
-                    cat === 'snapchat' ? 'سناب' :
-                    cat === 'twitter' ? 'تويتر' : 'تيليغرام';
-    b.addEventListener('click', ()=>{
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      b.classList.add('active');
-      activeCategory = cat;
-      applyFilters();
-    });
-    tabs.appendChild(b);
-  });
+/* SWITCH TAB */
+function switchTab(pl) {
+  currentTab = pl;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+  render();
 }
 
-function usdToSyp(u){ return Math.round(u * USD_TO_SYP); }
-
-function renderList(list){
-  currentList = list.slice();
-  const container = document.getElementById('servicesContainer');
-  container.innerHTML = '';
-  if(list.length===0){
-    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted)">لا توجد خدمات مطابقة</div>';
-    return;
-  }
-  list.forEach(s=>{
-    const el = document.createElement('div');
-    el.className = 'service-card';
-    el.innerHTML = `
-      <div style="display:flex;justify-content:space-between;gap:12px">
-        <div style="flex:1">
-          <h4>${escapeHtml(s.title)}</h4>
-          <div class="meta">${escapeHtml(s.desc)}</div>
-          <div class="badges">
-            <div class="badge">${escapeHtml(s.platform)}</div>
-            <div class="badge">${s.language==='arabic' ? 'عربي' : 'أجنبي'}</div>
-            ${s.notes ? `<div class="badge">${escapeHtml(s.notes)}</div>` : ''}
-          </div>
-        </div>
-        <div style="width:180px;text-align:left">
-          <div class="price">${Number(s.price_usd).toFixed(3)} $</div>
-          <div class="meta">${usdToSyp(Number(s.price_usd)).toLocaleString()} ل.س</div>
-          <div class="actions">
-            <a href="#" class="wa-btn" onclick="openOrderForm('${s.id}')">اطلب الآن</a>
-            <button class="details-btn" onclick="showDetails('${s.id}')">تفاصيل</button>
-          </div>
-        </div>
-      </div>
-    `;
-    container.appendChild(el);
-  });
-}
-
-/* Filters */
-function applyFilters(){
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
-  const lang = document.getElementById('langFilter').value;
-  const min = Number(document.getElementById('minSYP').value) || null;
-  const max = Number(document.getElementById('maxSYP').value) || null;
-
-  let list = services.filter(s=>s.platform===activeCategory);
-
-  if(lang !== 'all') list = list.filter(s => s.language === (lang==='arabic' ? 'arabic' : 'foreign'));
-  if(q) list = list.filter(s => (s.title + ' ' + (s.desc||'') + ' ' + (s.notes||'')).toLowerCase().includes(q));
-  if(min !== null) list = list.filter(s => usdToSyp(Number(s.price_usd)) >= min);
-  if(max !== null) list = list.filter(s => usdToSyp(Number(s.price_usd)) <= max);
-
-  renderList(list);
-}
-
-function resetFiltersAndRender(){
-  document.getElementById('searchInput').value='';
-  document.getElementById('langFilter').value='all';
-  document.getElementById('minSYP').value='';
-  document.getElementById('maxSYP').value='';
-  applyFilters();
-}
-
-/* Sorting */
-function sortBy(mode){
-  if(mode==='price_asc') services.sort((a,b)=>a.price_usd - b.price_usd);
-  else if(mode==='price_desc') services.sort((a,b)=>b.price_usd - a.price_usd);
-  else if(mode==='title') services.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
-  applyFilters();
-}
-
-/* Order modal and quantity calc */
+/* OPEN ORDER FORM */
 let ORDER_SERVICE = null;
 function openOrderForm(id){
-  ORDER_SERVICE = services.find(x=>x.id===id);
-  if(!ORDER_SERVICE) return;
-  document.getElementById('orderServiceTitle').innerText = ORDER_SERVICE.title;
-  document.getElementById('pricePerThousand').value = Number(ORDER_SERVICE.price_usd).toFixed(3);
-  document.getElementById('orderQty').value = 1000;
-  updateOrderTotal();
-  document.getElementById('orderModal').style.display = 'flex';
+    ORDER_SERVICE = services.find(x => x.id === id);
+    document.getElementById("orderServiceTitle").innerText = ORDER_SERVICE.title;
+    document.getElementById("orderModal").style.display = "flex";
 }
-function closeOrder(){ document.getElementById('orderModal').style.display = 'none'; }
-
-function updateOrderTotal(){
-  const qty = Number(document.getElementById('orderQty').value) || 0;
-  const perThousand = Number(document.getElementById('pricePerThousand').value) || 0;
-  const units = qty / 1000;
-  const totalUSD = units * perThousand;
-  const totalSYP = Math.round(totalUSD * USD_TO_SYP);
-  document.getElementById('orderTotal').innerText = `${totalSYP.toLocaleString()} ل.س (≈ ${totalUSD.toFixed(3)} USD)`;
+function closeOrder(){
+    document.getElementById("orderModal").style.display = "none";
 }
 
-document.getElementById('orderQty').addEventListener('input', updateOrderTotal);
-document.getElementById('pricePerThousand').addEventListener('input', updateOrderTotal);
-
-/* Submit order to WhatsApp */
+/* SUBMIT */
 function submitOrder(){
-  const name = document.getElementById('orderName').value.trim();
-  const phone = document.getElementById('orderPhone').value.trim();
-  const link = document.getElementById('orderLink').value.trim();
-  const notes = document.getElementById('orderNotes').value.trim();
-  if(!name || !phone || !link){ alert('الرجاء ملء الحقول الأساسية'); return; }
-  const qty = Number(document.getElementById('orderQty').value) || 0;
-  const perThousand = Number(document.getElementById('pricePerThousand').value) || 0;
-  const units = qty / 1000;
-  const totalUSD = (units * perThousand).toFixed(3);
-  const totalSYP = Math.round(Number(totalUSD) * USD_TO_SYP).toLocaleString();
+    const name = orderName.value.trim();
+    const phone = orderPhone.value.trim();
+    const link  = orderLink.value.trim();
+    const notes = orderNotes.value.trim();
 
-  const msg = `طلب خدمة جديدة:
+    if(!name || !phone || !link){
+        alert("الرجاء ملء الحقول الأساسية");
+        return;
+    }
+
+    const msg =
+`طلب خدمة جديدة:
 الاسم: ${name}
 الرقم: ${phone}
 الرابط: ${link}
-الكمية: ${qty}
-السعر لكل 1000: ${perThousand} USD
-الإجمالي: ${totalSYP} ل.س (≈ ${totalUSD} USD)
-الخدمة: ${ORDER_SERVICE.title}
+ملاحظات: ${notes || "لا يوجد"}
+
+الخدمة:
+${ORDER_SERVICE.title}
+السعر: ${usdToSyp(ORDER_SERVICE.price_usd)} ل.س
 ID: ${ORDER_SERVICE.id}
-ملاحظات: ${notes || 'لا يوجد'}`;
+`;
 
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-  closeOrder();
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`);
+
+    closeOrder();
 }
 
-/* Details */
-function showDetails(id){
-  const s = services.find(x=>x.id===id);
-  if(!s) return alert('لا توجد تفاصيل إضافية');
-  alert(`${s.title}\n\n${s.desc || ''}\n\nالسعر: ${s.price_usd} USD ≈ ${usdToSyp(Number(s.price_usd)).toLocaleString()} ل.س\nاللغة: ${s.language}`);
+/* RENDER */
+function render(){
+  const container = document.getElementById("servicesList");
+  container.innerHTML = "";
+
+  const search = document.getElementById("search").value.trim();
+  const type = document.getElementById("typeFilter").value;
+  const maxPrice = Number(document.getElementById("maxPrice").value || 999999999);
+
+  services
+    .filter(s => s.platform === currentTab)
+    .filter(s => type === "all" ? true : s.type === type)
+    .filter(s => usdToSyp(s.price_usd) <= maxPrice)
+    .filter(s => s.title.includes(search))
+    .forEach(s => {
+        container.innerHTML += `
+        <div class="card">
+            <div class="card-title">${s.title}</div>
+            <div class="card-desc">${s.desc}</div>
+            <div class="card-footer">
+                <div>${usdToSyp(s.price_usd).toLocaleString()} ل.س</div>
+                <a class="wa-btn" onclick="openOrderForm('${s.id}')">اطلب الآن</a>
+            </div>
+        </div>`;
+    });
 }
 
-/* Export / Import */
-function exportServices(){
-  const blob = new Blob([JSON.stringify(services,null,2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'services.json'; a.click();
-  URL.revokeObjectURL(url);
-}
-function importServices(){
-  const input = document.createElement('input'); input.type='file'; input.accept='.json';
-  input.onchange = e=>{
-    const f = e.target.files[0]; if(!f) return;
-    const r = new FileReader();
-    r.onload = ()=>{
-      try{
-        const data = JSON.parse(r.result);
-        if(!Array.isArray(data)) throw 'invalid';
-        services = data;
-        buildCategoryTabs();
-        applyFilters();
-        alert('تم استيراد الخدمات');
-      }catch(err){ alert('ملف غير صالح'); }
-    };
-    r.readAsText(f);
-  };
-  input.click();
-}
-
-/* Utils */
-function escapeHtml(str){ return String(str||'').replace(/[&<>"']/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
-
-/* init */
-let currentList = services.slice();
-buildCategoryTabs();
-applyFilters();
+render();
 </script>
+
 </body>
 </html>
