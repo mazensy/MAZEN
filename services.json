@@ -1,0 +1,38 @@
+[
+  {
+    "id": "fb_ar_1",
+    "category": "facebook",
+    "title": "خدمة ترويج صفحة فيسبوك (عربي)",
+    "desc": "خدمة ترويج صفحة وزيادة الظهور (وصف عام - عدّل هنا).",
+    "price_usd": 1.5,
+    "language": "arabic",
+    "notes": "بدء 0-24 ساعة • ضمان عام"
+  },
+  {
+    "id": "fb_en_1",
+    "category": "facebook",
+    "title": "Facebook Page Boost (foreign)",
+    "desc": "Promote page & increase visibility (generic description).",
+    "price_usd": 0.6,
+    "language": "foreign",
+    "notes": "Global audience"
+  },
+  {
+    "id": "ig_en_1",
+    "category": "instagram",
+    "title": "Instagram Growth Package (foreign)",
+    "desc": "Visibility & engagement pack (edit details in services.json).",
+    "price_usd": 1.4,
+    "language": "foreign",
+    "notes": ""
+  },
+  {
+    "id": "ig_ar_1",
+    "category": "instagram",
+    "title": "خدمة تفاعل انستغرام (عربي)",
+    "desc": "تعزيز التفاعل والمشاركة — وصف عام.",
+    "price_usd": 0.9,
+    "language": "arabic",
+    "notes": ""
+  }
+]
