@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>MAZEN — Premium Social Services</title>
+<title>MAZEN â€” ط®ط¯ظ…ط§طھ ط§ظ„ط³ظˆط´ظٹط§ظ„ ط§ظ„ظ…ظ…ظٹط²ط©</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -19,8 +19,9 @@
   --neon: 0 6px 20px rgba(123,60,255,0.12);
   --shadow: rgba(2,6,23,0.6);
   --success: #22c55e;
+  --card-bg: #0f172a;
+  --border-color: rgba(255,255,255,0.08);
 }
-/* Basic reset */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -30,102 +31,91 @@ body{
     radial-gradient(600px 300px at 92% 88%, rgba(122,60,255,0.02), transparent),
     var(--bg);
   color:var(--text); overflow-x:hidden;
-}  /* ===== Header (glass + dynamic blur) ===== */
+}
 .header{
-position:sticky; top:0; z-index:1000;
-display:flex; align-items:center; justify-content:space-between;
-gap:12px; padding:14px 18px;
-backdrop-filter: blur(6px);
-background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));
-border-bottom: 1px solid rgba(255,255,255,0.03);
-transition:backdrop-filter .28s ease, background .28s ease;
+  position:sticky; top:0; z-index:1000;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:14px 18px;
+  backdrop-filter: blur(10px);
+  background: rgba(5, 5, 11, 0.8);
+  border-bottom: 1px solid var(--border-color);
+  transition:background .28s ease;
 }
-.header.scrolled{ backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); }
-
-/* logo */
+.header.scrolled{ background: rgba(5, 5, 11, 0.95); }
 .logo{display:flex; align-items:center; gap:12px}
-.sym{width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:22px; color:#fff; background:linear-gradient(135deg,var(--accent1),var(--accent2)); box-shadow:var(--card-glow)}
-.brand{font-weight:900}
-.tag{color:var(--muted); font-size:13px}
-
-/* container */
-.container{max-width:1180px; margin:20px auto; padding:0 18px}
-
-/* hero / intro */
-.hero{display:flex; justify-content:space-between; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
-.hero h1{margin:0; font-size:22px}
-.hero p{margin:6px 0 0 0; color:var(--muted); font-size:13px}
-
-/* top offers bar */
-.top-offer{display:flex; gap:10px; align-items:center; padding:10px 14px; border-radius:10px; background: linear-gradient(90deg,#ffd16611,#7a3cff11); border:1px solid rgba(255,255,255,0.02); color:var(--text); margin-bottom:12px; font-weight:700}
-.top-offer small{color:var(--muted); font-weight:600}
-
-/* layout controls */
-.controls{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px}
-
-/* category bar (tabs) */
-.category-bar{display:flex; gap:8px; flex-wrap:wrap}
+.sym{width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:20px; color:#fff; background:linear-gradient(135deg,var(--accent1),var(--accent2)); box-shadow:var(--neon)}
+.brand{font-weight:900; font-size:18px;}
+.tag{color:var(--muted); font-size:12px}
+.container{max-width:1200px; margin:30px auto; padding:0 18px}
+.hero{display:flex; justify-content:space-between; gap:20px; align-items:center; flex-wrap:wrap; margin-bottom:20px; padding:20px 0;}
+.hero h1{margin:0; font-size:28px; font-weight:900;}
+.hero p{margin:8px 0 0 0; color:var(--muted); font-size:15px}
+.top-offer{
+  display:flex; gap:12px; align-items:center; padding:12px 18px; border-radius:12px;
+  background: linear-gradient(90deg,rgba(255,209,102,0.1),rgba(122,60,255,0.1));
+  border:1px solid rgba(255,209,102,0.2); color:var(--text);
+  font-weight:700; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.top-offer small{color:var(--accent-cta); font-weight:600}
+.controls{display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-bottom:20px; padding:10px 0; border-bottom:1px solid var(--border-color);}
+.category-bar{display:flex; gap:10px; flex-wrap:wrap}
 .cat-btn{
-display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
-background:transparent; color:var(--muted); font-weight:800; transition:transform .18s ease, box-shadow .18s ease;
+  display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; cursor:pointer; border:1px solid var(--border-color);
+  background:var(--card-bg); color:var(--muted); font-weight:700; transition:all .2s ease;
+  font-size:14px;
 }
-.cat-btn svg{filter:drop-shadow(0 6px 20px rgba(0,0,0,0.5))}
-.cat-btn.active{ background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; box-shadow: var(--neon); transform:translateY(-3px) }
-
-/* language filter */
-.lang-filter{display:flex; gap:8px; align-items:center}
-.lang-btn{padding:8px 12px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted); font-weight:700; cursor:pointer}
-.lang-btn.active{background:var(--accent1); color:#fff; border:none; box-shadow:0 8px 30px rgba(43,130,255,0.08)}
-
-/* search / actions */
+.cat-btn svg{filter:drop-shadow(0 4px 10px rgba(0,0,0,0.3))}
+.cat-btn:hover{ border-color:var(--accent1); color:var(--text); }
+.cat-btn.active{ background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; box-shadow: var(--neon); border-color:var(--accent2); transform:translateY(-2px) }
+.lang-filter{display:flex; gap:8px; align-items:center; margin-right:auto;}
+.lang-btn{
+  padding:8px 12px; border-radius:8px; background:var(--card-bg);
+  border:1px solid var(--border-color); color:var(--muted); font-weight:600; cursor:pointer;
+  transition:all .2s ease;
+}
+.lang-btn:hover{ border-color:var(--accent1); color:var(--text); }
+.lang-btn.active{background:var(--accent1); color:#fff; border-color:var(--accent1); box-shadow:0 6px 20px rgba(43,130,255,0.15)}
 .actions-right{margin-left:auto; display:flex; gap:8px; align-items:center}
-
-/* cards grid */
 .cards{
-display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; margin-top:6px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:25px; margin-top:15px;
 }
-
-/* card style (glass + gradient border + 3D tilt) */
 .card{
-background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-border-radius:14px; padding:14px; border:1px solid rgba(255,255,255,0.03);
-transition: transform .25s cubic-bezier(.2,.9,.25,1), box-shadow .25s ease;
-transform-style:preserve-3d;
---tiltX:0deg; --tiltY:0deg;
-will-change:transform;
-position:relative; overflow:visible;
+  background: var(--card-bg);
+  border-radius:16px; padding:20px; border:1px solid var(--border-color);
+  transition: transform .3s cubic-bezier(.2,.9,.25,1), box-shadow .3s ease;
+  transform-style:preserve-3d;
+  --tiltX:0deg; --tiltY:0deg;
+  will-change:transform;
+  position:relative; overflow:hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 .card::after{
-content:""; position:absolute; inset:-1px; border-radius:15px; pointer-events:none;
-background:linear-gradient(90deg, transparent, rgba(123,60,255,0.06), transparent);
-opacity:0; transition:opacity .25s ease;
+  content:""; position:absolute; inset:-1px; border-radius:17px; pointer-events:none;
+  background:linear-gradient(90deg, transparent, rgba(123,60,255,0.1), transparent);
+  opacity:0; transition:opacity .3s ease;
 }
-.card:hover{ transform: translateY(-10px) rotateX(var(--tiltX)) rotateY(var(--tiltY)); box-shadow: 0 30px 70px rgba(4,8,20,0.6); }
+.card:hover{ transform: translateY(-5px) rotateX(var(--tiltX)) rotateY(var(--tiltY)); box-shadow: 0 20px 50px rgba(4,8,20,0.8); }
 .card:hover::after{ opacity:1 }
-
-/* card inner */
-.card .left{display:flex; gap:12px; align-items:flex-start}
-.icon-wrap{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02); flex-shrink:0}
-.card h3{margin:0 0 6px; font-size:16px}
-.card .desc{color:var(--muted); font-size:13px}
-.badges{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
-.badge{padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.02); color:var(--muted); font-size:12px; border:1px solid rgba(255,255,255,0.02)}
-.price{font-weight:800; color:var(--accent-cta); margin-top:10px; font-size:18px}
-
-/* actions column */
-.actions{display:flex; flex-direction:column; align-items:flex-end; gap:8px; min-width:150px}
+.card-content{display:flex; justify-content:space-between; align-items:flex-start; gap:15px;}
+.card .left{display:flex; gap:15px; align-items:flex-start}
+.icon-wrap{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05); flex-shrink:0}
+.card h3{margin:0 0 4px; font-size:18px; font-weight:800;}
+.card .desc{color:var(--muted); font-size:14px; line-height:1.4;}
+.badges{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap}
+.badge{padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.05); color:var(--muted); font-size:12px; border:1px solid rgba(255,255,255,0.05)}
+.price{font-weight:900; color:var(--accent-cta); margin-top:15px; font-size:22px; text-align:left;}
+.actions{display:flex; flex-direction:column; align-items:flex-end; gap:10px; min-width:120px; margin-top:10px;}
 .btn{
-padding:9px 12px; border-radius:10px; cursor:pointer; font-weight:800; text-decoration:none; border: none;
+  padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:800; text-decoration:none; border: none;
+  transition:all .2s ease;
 }
-.btn-wa{background:#25D366; color:#032}
-.btn-details{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04)}
+.btn-wa{background:#25D366; color:#032; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);}
+.btn-wa:hover{ background:#1EBE55; }
+.btn-details{background:transparent; color:var(--muted); border:1px solid var(--border-color);}
+.btn-details:hover{ background:rgba(255,255,255,0.05); color:var(--text); }
 
-/* old modal (kept, but hidden/unused) */
-#orderModal_old{display:none}
-
-/* ========== NEW MODAL STYLES ========== */
-
-/* modal background */
+/* ========== MODAL STYLES (Fix for positioning) ========== */
 .modal-bg{
   position:fixed;
   inset:0;
@@ -135,9 +125,8 @@ padding:9px 12px; border-radius:10px; cursor:pointer; font-weight:800; text-deco
   z-index:2200;
   background:rgba(2,6,23,0.55);
   backdrop-filter:blur(8px);
+  overflow-y: auto;
 }
-
-/* modal card */
 .modal-card{
   width:94%; max-width:520px;
   background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
@@ -147,392 +136,410 @@ padding:9px 12px; border-radius:10px; cursor:pointer; font-weight:800; text-deco
   box-shadow:0 30px 80px rgba(0,0,0,0.6);
   position:relative;
   animation:slideUp .28s ease both;
+  margin: 20px 0;
 }
-
-/* close */
 .modal-close{
   position:absolute; top:12px; left:12px;
   width:40px; height:40px; border-radius:50%;
   border:none; background:rgba(255,255,255,0.08); color:#fff; font-size:22px; cursor:pointer;
 }
-
-/* neon effect */
 .neon{
   box-shadow: 0 0 12px rgba(0,213,255,0.14), 0 0 28px rgba(123,60,255,0.06);
   border:1px solid rgba(0,213,255,0.18);
 }
-
-/* inputs inside modal */
 .modal-card input, .modal-card select{
   width:100%; padding:12px; border-radius:10px; margin-top:6px; border:none;
   background:rgba(0,0,0,0.45); color:var(--text);
 }
-
-/* price box */
 .price-box{
   padding:12px; border-radius:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); margin-top:8px; font-weight:700;
 }
-
-/* confirm overlay */
 .confirm-box{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:2600; background:rgba(0,0,0,0.65); backdrop-filter:blur(6px)}
 .confirm-card{width:90%;max-width:420px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.12); text-align:right}
-
-/* status */
 .status-box{margin-top:12px;padding:10px;border-radius:10px;background:rgba(255,255,0,0.12);border:1px solid rgba(255,255,0,0.28);text-align:center}
-
-/* small status checker modal */
 .status-check-card{width:90%;max-width:480px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);text-align:right}
-
-/* responsive */
-@media (max-width:820px){
-.actions{min-width:110px}
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* tiny utility */
+@media (max-width:768px){
+  .cards{ grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+  .hero h1{ font-size:24px; }
+  .hero p{ font-size:14px; }
+  .top-offer{ display:none; }
+  .lang-filter{ margin-right:0; margin-top:10px; }
+  .controls{ flex-direction:column; align-items:flex-start; }
+}
 .small{font-size:12px;color:var(--muted)}
 </style>
-
 </head>
 <body>
-<!-- custom cursor -->
 <div id="cursorFollow" class="cursor-follow" style="background:linear-gradient(90deg,var(--accent1),var(--accent2));width:18px;height:18px;position:fixed;left:0;top:0;border-radius:50%;pointer-events:none;z-index:2000;transform:translate(-50%,-50%);mix-blend-mode:screen;"></div>
+<canvas id="particleCanvas" style="position:fixed;inset:0;z-index:1;pointer-events:none;"></canvas>
+<canvas id="snowCanvas" style="position:fixed;inset:0;z-index:1;pointer-events:none;"></canvas>
+
 <header class="header" id="siteHeader">
-  <div style="display:flex;align-items:center;gap:12px">
+  <div class="logo">
     <div class="sym">M</div>
     <div>
       <div class="brand">MAZEN</div>
-      <div class="tag small">خدمات سوشيال — Premium</div>
+      <div class="tag small">ط®ط¯ظ…ط§طھ ط³ظˆط´ظٹط§ظ„ â€” Premium</div>
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:10px">
-    <div class="small">واتساب: <strong>+963 980 962 294</strong></div>
+    <div class="small" style="font-weight:700;">ظˆط§طھط³ط§ط¨: <strong style="color:var(--accent-cta)">+963 980 962 294</strong></div>
     <div style="display:flex;gap:8px;align-items:center">
-      <button id="checkStatusBtn" class="btn" title="تحقق من حالة طلبك" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 10px;border-radius:10px" onclick="openStatusChecker()">تحقق من الطلب</button>
-      <button id="themeToggle" class="btn" title="تبديل الثيم" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)">☀️</button>
+      <button id="checkStatusBtn" class="btn" title="طھط­ظ‚ظ‚ ظ…ظ† ط­ط§ظ„ط© ط·ظ„ط¨ظƒ" style="background:transparent;border:1px solid var(--border-color);color:var(--muted);padding:8px 10px;border-radius:10px" onclick="openStatusChecker()">طھط­ظ‚ظ‚ ظ…ظ† ط§ظ„ط·ظ„ط¨</button>
+      <button id="themeToggle" class="btn" title="طھط¨ط¯ظٹظ„ ط§ظ„ط«ظٹظ…" style="background:transparent;border:1px solid var(--border-color);color:var(--muted);padding:8px 10px;border-radius:10px">ًںŒ™</button>
     </div>
   </div>
 </header>
+
 <main class="container">
   <section class="hero">
     <div>
-      <h1>MAZEN — خدمات السوشيال (Premium)</h1>
-      <p class="small">واجهة داكنة فاخرة — تحكم بكل الخدمات والمؤثرات. اضغط على أي خدمة لطلبها عبر النظام الجديد.</p>
+      <h1>MAZEN â€” ط®ط¯ظ…ط§طھ ط§ظ„ط³ظˆط´ظٹط§ظ„ (Premium)</h1>
+      <p>ظˆط§ط¬ظ‡ط© ط¯ط§ظƒظ†ط© ظپط§ط®ط±ط© â€” طھط­ظƒظ… ط¨ظƒظ„ ط§ظ„ط®ط¯ظ…ط§طھ ظˆط§ظ„ظ…ط¤ط«ط±ط§طھ. ط§ط¶ط؛ط· ط¹ظ„ظ‰ ط£ظٹ ط®ط¯ظ…ط© ظ„ط·ظ„ط¨ظ‡ط§ ط¹ط¨ط± ط§ظ„ظ†ط¸ط§ظ… ط§ظ„ط¬ط¯ظٹط¯.</p>
     </div>
     <div class="top-offer">
-      <svg width="20" height="20" viewBox="0 0 24 24" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,0.4))"><path d="M12 2l2.6 6.9L21 9.2l-5 3.7L17 20l-5-3.3L7 20l1-7.1-5-3.7 6.4-0.3L12 2z" fill="#ffd166"/></svg>
-      <div style="line-height:1">
-        <div>عروض نهاية السنة</div>
-        <small>خصومات على باقات المتابعين — اطلب الآن</small>
+      <svg width="24" height="24" viewBox="0 0 24 24" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,0.4))"><path d="M12 2l2.6 6.9L21 9.2l-5 3.7L17 20l-5-3.3L7 20l1-7.1-5-3.7 6.4-0.3L12 2z" fill="#ffd166"/></svg>
+      <div style="line-height:1.2">
+        <div style="font-size:16px;">ط¹ط±ظˆط¶ ظ†ظ‡ط§ظٹط© ط§ظ„ط³ظ†ط©</div>
+        <small style="font-size:13px;">ط®طµظˆظ…ط§طھ ط¹ظ„ظ‰ ط¨ط§ظ‚ط§طھ ط§ظ„ظ…طھط§ط¨ط¹ظٹظ† â€” ط§ط·ظ„ط¨ ط§ظ„ط¢ظ†</small>
       </div>
     </div>
   </section>
 
   <div class="controls">
-    <div class="category-bar" id="categoryBar" role="tablist" aria-label="منصات التواصل"></div>
-    <div class="lang-filter" style="margin-left:auto">
-      <button id="lg_all" class="lang-btn active" onclick="setLang('all')">الكل</button>
-      <button id="lg_ar" class="lang-btn" onclick="setLang('arabic')">عربي</button>
-      <button id="lg_en" class="lang-btn" onclick="setLang('foreign')">أجنبي</button>
+    <div class="category-bar" id="categoryBar" role="tablist" aria-label="ظ…ظ†طµط§طھ ط§ظ„طھظˆط§طµظ„"></div>
+    <div class="lang-filter">
+      <button id="lg_all" class="lang-btn active" onclick="setLang('all')">ط§ظ„ظƒظ„</button>
+      <button id="lg_ar" class="lang-btn" onclick="setLang('arabic')">ط¹ط±ط¨ظٹ</button>
+      <button id="lg_en" class="lang-btn" onclick="setLang('foreign')">ط£ط¬ظ†ط¨ظٹ</button>
     </div>
   </div>
 
-  <!-- skeleton loader -->
-  <div id="skeletonArea" class="skeleton-grid" aria-hidden="false">
-    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
-    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
-    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
-    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
+  <div id="skeletonArea" class="cards" aria-hidden="false">
+    <div class="card skel" style="height:150px;background:linear-gradient(90deg,#0f172a,#1e293b,#0f172a); animation: pulse 1.5s infinite;"></div>
+    <div class="card skel" style="height:150px;background:linear-gradient(90deg,#0f172a,#1e293b,#0f172a); animation: pulse 1.5s infinite 0.2s;"></div>
+    <div class="card skel" style="height:150px;background:linear-gradient(90deg,#0f172a,#1e293b,#0f172a); animation: pulse 1.5s infinite 0.4s;"></div>
+    <div class="card skel" style="height:150px;background:linear-gradient(90deg,#0f172a,#1e293b,#0f172a); animation: pulse 1.5s infinite 0.6s;"></div>
   </div>
+  <style>@keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }</style>
 
-  <!-- services -->
-  <div id="servicesContainer" class="cards" aria-live="polite" style="display:none"></div>
-
-  <footer class="footer">
-    © MAZEN — كل الحقوق محفوظة — تواصل: +963980962294 — <a href="#" style="color:var(--muted);text-decoration:none">سياسة الخصوصية</a>
-  </footer>
+  <div id="servicesContainer" class="cards" style="display:none"></div>
 </main>
 
-<!-- =========================
-     ORDER MODAL
-     ========================= -->
 <div id="orderModal" class="modal-bg" aria-hidden="true">
-  <div class="modal-card" role="dialog" aria-modal="true">
-    <button class="modal-close" onclick="closeOrder()">×</button>
+  <div class="modal-card neon">
+    <button class="modal-close" onclick="closeOrder()">أ—</button>
+    <h2 id="modalTitle" style="margin-top:0;margin-bottom:15px;font-size:20px;">ط·ظ„ط¨ ط®ط¯ظ…ط©:</h2>
+    <div style="line-height:1.8;font-size:14px;color:var(--muted)">
+      <div id="modalDesc"></div>
+      <div id="modalMinMax" style="margin-top:8px;"></div>
+    </div>
+    <div style="margin-top:20px">
+      <label for="orderLinkAuto" style="font-weight:700;font-size:14px;">ط±ط§ط¨ط· ط§ظ„ط­ط³ط§ط¨/ط§ظ„ظ…ظ†ط´ظˆط±:</label>
+      <input type="text" id="orderLinkAuto" placeholder="ط£ط¯ط®ظ„ ط§ظ„ط±ط§ط¨ط· ظ‡ظ†ط§" required>
+    </div>
+    <div style="margin-top:15px">
+      <label for="orderQty" style="font-weight:700;font-size:14px;">ط§ظ„ظƒظ…ظٹط© ط§ظ„ظ…ط·ظ„ظˆط¨ط©:</label>
+      <input type="number" id="orderQty" placeholder="ط§ظ„ط­ط¯ ط§ظ„ط£ط¯ظ†ظ‰ 100" required>
+    </div>
+    <div style="margin-top:15px">
+      <label for="paymentMethodAuto" style="font-weight:700;font-size:14px;">ط·ط±ظٹظ‚ط© ط§ظ„ط¯ظپط¹:</label>
+      <select id="paymentMethodAuto">
+        <option value="syr">ط³ظٹط±ظٹطھظ„ ظƒط§ط´</option>
+        <option value="sham">ط´ط§ظ… ظƒط§ط´ (ظƒظˆط¯)</option>
+      </select>
+    </div>
 
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
-      <div id="modalPlatformIcon" style="width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05)"></div>
-      <div>
-        <h3 id="modalTitle" style="margin:0">طلب خدمة</h3>
-        <div id="modalService" class="small" style="color:var(--muted)"></div>
+    <div class="price-box">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:14px;color:var(--muted)">ط§ظ„طھظƒظ„ظپط© ط§ظ„طھظ‚ط¯ظٹط±ظٹط©:</span>
+        <span id="totalPrice" style="font-size:24px;color:var(--accent-cta);font-weight:900;">0 ظ„.ط³</span>
       </div>
     </div>
-
-    <label class="small">رابط الحساب / المنشور</label>
-    <input id="orderLinkAuto" placeholder="ضع رابط الحساب أو رابط المنشور" />
-
-    <label class="small" style="margin-top:12px">الكمية المطلوبة (الحد الأدنى 100)</label>
-    <input id="orderQty" type="number" placeholder="مثال: 1500" oninput="updateAutoPrice()" min="100" />
-
-    <label class="small" style="margin-top:12px">السعر الكلي</label>
-    <div id="autoPriceBox" class="price-box">0 ل.س</div>
-
-    <label class="small" style="margin-top:12px">طريقة الدفع</label>
-    <select id="paymentMethodAuto" style="margin-top:6px" onchange="showPaymentInfo()">
-      <option value="syr">سيريتل كاش</option>
-      <option value="sham">شام كاش</option>
-    </select>
-
-    <div id="paymentInfo" class="small" style="margin-top:8px;color:var(--muted)">سيريتل كاش: <strong id="syrNumberInline">0980962294</strong> · شام كاش: <strong id="shamCodeInline">bc6cc5f8ce57b34373d251b964853432</strong></div>
-
-    <label class="small" style="margin-top:12px">كود عملية التحويل</label>
-    <input id="transferCodeAuto" placeholder="مثال: 123456" style="margin-top:6px" />
-
-    <div style="margin-top:16px;display:flex;gap:10px">
-      <button onclick="confirmAndSend()" class="btn" style="flex:1;background:linear-gradient(135deg,#3b82f6,#2563eb);box-shadow:0 0 18px rgba(59,130,246,0.25)">تأكيد الطلب</button>
-      <button onclick="closeOrder()" class="btn" style="flex:0.6;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">إلغاء</button>
-    </div>
-
+    <button onclick="confirmAndSend()" style="margin-top:20px;padding:12px 20px;border:none;border-radius:10px;background:var(--accent2);color:#fff;font-size:16px;cursor:pointer;width:100%;font-weight:800;box-shadow:0 6px 20px rgba(122,60,255,0.3);">طھط£ظƒظٹط¯ ط§ظ„ط·ظ„ط¨ ظˆط§ظ„ظ…طھط§ط¨ط¹ط©</button>
   </div>
 </div>
 
-<!-- confirmation overlay -->
 <div id="confirmBox" class="confirm-box" aria-hidden="true">
-  <div class="confirm-card" id="confirmCard"></div>
+  <div id="confirmCard" class="confirm-card"></div>
 </div>
 
-<!-- status checker overlay -->
-<div id="statusChecker" class="confirm-box" aria-hidden="true">
-  <div class="status-check-card" id="statusCheckCard" style="text-align:right">
-    <h3 style="margin-top:0">تحقق من حالة الطلب</h3>
-    <p class="small">أدخل معرف الطلب (ID) الذي حصلت عليه بعد تأكيد الطلب.</p>
-    <input id="statusOrderId" placeholder="مثال: 90534" style="margin-top:8px;padding:10px;border-radius:8px;border:none;background:rgba(0,0,0,0.45);color:var(--text)" />
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button onclick="checkOrderStatus()" class="btn" style="flex:1;background:linear-gradient(135deg,#7a3cff,#2b82ff);color:#fff">تحقق</button>
-      <button onclick="closeStatusChecker()" class="btn" style="flex:0.6;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">إغلاق</button>
+<div id="statusChecker" class="modal-bg" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeStatusChecker()">أ—</button>
+    <h2 style="margin-top:0;margin-bottom:15px;font-size:20px;">طھط­ظ‚ظ‚ ظ…ظ† ط­ط§ظ„ط© ط§ظ„ط·ظ„ط¨</h2>
+    <div style="margin-top:20px">
+      <label for="statusOrderId" style="font-weight:700;font-size:14px;">ظ…ط¹ط±ظپ ط§ظ„ط·ظ„ط¨:</label>
+      <input type="number" id="statusOrderId" placeholder="ط£ط¯ط®ظ„ ظ…ط¹ط±ظپ ط§ظ„ط·ظ„ط¨ ظ‡ظ†ط§" required>
     </div>
-    <div id="statusResult" style="margin-top:12px;display:none"></div>
+    <button onclick="checkOrderStatus()" style="margin-top:15px;padding:12px 20px;border:none;border-radius:10px;background:var(--accent1);color:#fff;font-size:16px;cursor:pointer;width:100%;font-weight:800;">طھط­ظ‚ظ‚</button>
+    <div id="statusResult" class="status-box" style="display:none; margin-top:15px; background:rgba(43,130,255,0.1); border-color:rgba(43,130,255,0.3);"></div>
   </div>
 </div>
 
-<!-- confirmation sound -->
-<audio id="successSound" preload="auto">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-confirmation-tone-2861.mp3" type="audio/mpeg">
-</audio>
-
-<!-- canvases for effects -->
-<canvas id="particleCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:5"></canvas>
-<canvas id="snowCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:6"></canvas>
+<audio id="successSound" src="https://www.soundjay.com/button/button-3.mp3" preload="auto"></audio>
 
 <script>
-/* ==================== CONFIG & DATA ==================== */
-/* تغيير سعر الصرف هنا — ضع سعر السوق الحالي */
-const EXCHANGE_RATE = 2500; // ليرة سورية لكل 1 USD — غيّره حسب السوق
+// ==================================================================================
+// ==================== ظ…ظ†ط·ظ‚ط© ط§ظ„طھط¹ط¯ظٹظ„ ط§ظ„ط³ظ‡ظ„ ظ„ظ„ط£ظ‚ط³ط§ظ… ظˆط§ظ„ط®ط¯ظ…ط§طھ ====================
+// ==================================================================================
 
-/* أرقام الدفع (مضمنة) */
+const WA_NUMBER = '963980962294';
 const SYRITEL_NUMBER = '0980962294';
 const SHAM_CODE = 'bc6cc5f8ce57b34373d251b964853432';
+const USD_TO_SYP_RATE = 15000;
 
-/* WhatsApp */
-const WA_NUMBER = '963980962294'; // بدون + — استخدم لصيغة wa.me
-
-/* الخدمات (الأسعار مُخزنة بالدولار لكل 1000) */
-const SERVICES = [
-  {id:'fb_ar_1', platform:'facebook', title:'متابعين فيسبوك — عربي', desc:'حسابات عربية نشطة • ضمان 30 يوم', price_usd:1.50, language:'arabic', packages:[{label:'1k',mult:1},{label:'5k',mult:5},{label:'10k',mult:10}]},
-  {id:'fb_en_1', platform:'facebook', title:'لايكات فيسبوك — أجنبي', desc:'لايكات سريعة • جودة جيدة', price_usd:0.31, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]},
-
-  {id:'ig_ar_1', platform:'instagram', title:'تصميم منشورات إنستغرام', desc:'حزمة 10 منشورات • PSD • تعديل 2 مرة', price_usd:40, language:'arabic', packages:[{label:'حزمة',mult:1}]},
-  {id:'ig_en_1', platform:'instagram', title:'متابعين إنستغرام — أجنبي', desc:'جودة عالية • بدء سريع', price_usd:1.4, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]},
-
-  {id:'tk_en_1', platform:'tiktok', title:'متابعين تيك توك', desc:'جودة ممتازة • بدء سريع', price_usd:1.2, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]},
-
-  {id:'yt_en_1', platform:'youtube', title:'مشاهدات يوتيوب', desc:'مشاهدات حقيقية • مدة كاملة', price_usd:1.5, language:'foreign', packages:[{label:'1k',mult:1},{label:'10k',mult:10}]},
-
-  {id:'tw_en_1', platform:'twitter', title:'متابعين تويتر (X)', desc:'زيادة متابعات • متوافق', price_usd:1.1, language:'foreign', packages:[{label:'1k',mult:1}]},
-
-  {id:'sc_en_1', platform:'snapchat', title:'خدمة سناب شات', desc:'متابعات وترويج سناب', price_usd:1.8, language:'foreign', packages:[{label:'1k',mult:1}]},
-
-  {id:'tg_en_1', platform:'telegram', title:'أعضاء قناة تيليجرام', desc:'أعضاء نشطين • خيارات متعددة', price_usd:0.9, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]}
+const CATEGORIES = [
+  { id: 'instagram', title: 'ط§ظ†ط³طھط¬ط±ط§ظ…', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>' },
+  { id: 'tiktok', title: 'طھظٹظƒ طھظˆظƒ', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.04 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' },
+  { id: 'telegram', title: 'طھظ„ظٹط¬ط±ط§ظ…', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 11-9 11s-9-4-9-11a9 9 0 0 1 18 0z"></path><polyline points="12 2 12 12"></polyline></svg>' },
+  { id: 'youtube', title: 'ظٹظˆطھظٹظˆط¨', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C2 8.16 2 12 2 12s0 3.84.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C22 15.84 22 12 22 12s0-3.84-.46-5.58z"></path><polygon points="10 15 15 12 10 9 10 15"></polygon></svg>' },
+  { id: 'facebook', title: 'ظپظٹط³ط¨ظˆظƒ', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>' },
+  { id: 'twitter', title: 'طھظˆظٹطھط±', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>' },
 ];
 
-const PLATFORM_ORDER = ['facebook','instagram','tiktok','youtube','twitter','snapchat','telegram'];
-const PLATFORM_LABEL = {
-  facebook:'فيسبوك', instagram:'إنستغرام', tiktok:'تيك توك', youtube:'يوتيوب',
-  twitter:'تويتر', snapchat:'سناب شات', telegram:'تيليجرام'
-};
+const SERVICES = [
+  { id: 1, cat: 'instagram', title: 'ظ…طھط§ط¨ط¹ظٹظ† ط§ظ†ط³طھط¬ط±ط§ظ… (ط¹ط±ط¨ظٹ)', desc: 'ظ…طھط§ط¨ط¹ظٹظ† ط¹ط±ط¨ ط­ظ‚ظٹظ‚ظٹظٹظ† ظˆظ…ط¶ظ…ظˆظ†ظٹظ†طŒ ط³ط±ط¹ط© ط¹ط§ظ„ظٹط©.', price: 1.2, lang: 'ar', min: 100, max: 100000, speed: 'ط³ط±ظٹط¹', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 2, cat: 'instagram', title: 'ظ…طھط§ط¨ط¹ظٹظ† ط§ظ†ط³طھط¬ط±ط§ظ… (ط£ط¬ظ†ط¨ظٹ)', desc: 'ظ…طھط§ط¨ط¹ظٹظ† ط£ط¬ط§ظ†ط¨ ط¨ط¬ظˆط¯ط© ط¹ط§ظ„ظٹط©طŒ ط¨ط¯ط، ظپظˆط±ظٹ.', price: 0.8, lang: 'en', min: 100, max: 100000, speed: 'ظ…طھظˆط³ط·', quality: 'ط¹ط§ط¯ظٹ' },
+  { id: 3, cat: 'instagram', title: 'ظ„ط§ظٹظƒط§طھ ط§ظ†ط³طھط¬ط±ط§ظ… (ط¹ط±ط¨ظٹ)', desc: 'ظ„ط§ظٹظƒط§طھ ط¹ط±ط¨ظٹط© ط¹ظ„ظ‰ ط§ظ„ظ…ظ†ط´ظˆط±ط§طھطŒ ط«ط§ط¨طھط©.', price: 0.5, lang: 'ar', min: 50, max: 50000, speed: 'ط³ط±ظٹط¹', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 4, cat: 'instagram', title: 'ظ…ط´ط§ظ‡ط¯ط§طھ ط±ظٹظ„ط² ط§ظ†ط³طھط¬ط±ط§ظ…', desc: 'ظ…ط´ط§ظ‡ط¯ط§طھ ط³ط±ظٹط¹ط© ط¬ط¯ط§ظ‹ ظ„ظ„ط±ظٹظ„ط²طŒ ط¬ظˆط¯ط© ظ…ظ…طھط§ط²ط©.', price: 0.1, lang: 'en', min: 1000, max: 500000, speed: 'ظپظˆط±ظٹ', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 5, cat: 'tiktok', title: 'ظ…طھط§ط¨ط¹ظٹظ† طھظٹظƒ طھظˆظƒ (ط¹ط±ط¨ظٹ)', desc: 'ظ…طھط§ط¨ط¹ظٹظ† ط¹ط±ط¨ ط­ظ‚ظٹظ‚ظٹظٹظ†طŒ ط¶ظ…ط§ظ† طھط¹ظˆظٹط¶.', price: 1.5, lang: 'ar', min: 100, max: 50000, speed: 'ظ…طھظˆط³ط·', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 6, cat: 'tiktok', title: 'ظ…طھط§ط¨ط¹ظٹظ† طھظٹظƒ طھظˆظƒ (ط£ط¬ظ†ط¨ظٹ)', desc: 'ظ…طھط§ط¨ط¹ظٹظ† ط£ط¬ط§ظ†ط¨طŒ ط¬ظˆط¯ط© ط¹ط§ظ„ظٹط© ط¬ط¯ط§ظ‹.', price: 1.0, lang: 'en', min: 100, max: 100000, speed: 'ط³ط±ظٹط¹', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 7, cat: 'tiktok', title: 'ظ„ط§ظٹظƒط§طھ طھظٹظƒ طھظˆظƒ', desc: 'ظ„ط§ظٹظƒط§طھ ط¹ظ„ظ‰ ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھطŒ ط¨ط¯ط، ظپظˆط±ظٹ.', price: 0.6, lang: 'en', min: 50, max: 50000, speed: 'ظپظˆط±ظٹ', quality: 'ط¹ط§ط¯ظٹ' },
+  { id: 8, cat: 'telegram', title: 'ط£ط¹ط¶ط§ط، ظ‚ظ†ط§ط© طھظ„ظٹط¬ط±ط§ظ… (ط¹ط±ط¨ظٹ)', desc: 'ط£ط¹ط¶ط§ط، ط¹ط±ط¨ ط­ظ‚ظٹظ‚ظٹظٹظ† ظ„ظ‚ظ†ط§طھظƒطŒ ط«ط§ط¨طھظٹظ†.', price: 2.0, lang: 'ar', min: 50, max: 10000, speed: 'ظ…طھظˆط³ط·', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 9, cat: 'telegram', title: 'ظ…ط´ط§ظ‡ط¯ط§طھ ظ…ظ†ط´ظˆط±ط§طھ طھظ„ظٹط¬ط±ط§ظ…', desc: 'ظ…ط´ط§ظ‡ط¯ط§طھ ط³ط±ظٹط¹ط© ط¬ط¯ط§ظ‹ ظ„ظ„ظ…ظ†ط´ظˆط±ط§طھ.', price: 0.2, lang: 'en', min: 1000, max: 200000, speed: 'ظپظˆط±ظٹ', quality: 'ط¹ط§ط¯ظٹ' },
+  { id: 10, cat: 'youtube', title: 'ظ…ط´طھط±ظƒظٹظ† ظٹظˆطھظٹظˆط¨', desc: 'ظ…ط´طھط±ظƒظٹظ† ط­ظ‚ظٹظ‚ظٹظٹظ†طŒ ط¶ظ…ط§ظ† 30 ظٹظˆظ….', price: 5.0, lang: 'en', min: 10, max: 1000, speed: 'ط¨ط·ظٹط،', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 11, cat: 'youtube', title: 'ظ…ط´ط§ظ‡ط¯ط§طھ ظٹظˆطھظٹظˆط¨', desc: 'ظ…ط´ط§ظ‡ط¯ط§طھ ط¹ط§ظ„ظٹط© ط§ظ„ط¬ظˆط¯ط©طŒ ط«ط§ط¨طھط©.', price: 0.9, lang: 'en', min: 1000, max: 500000, speed: 'ط³ط±ظٹط¹', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 12, cat: 'facebook', title: 'ظ…طھط§ط¨ط¹ظٹظ† طµظپط­ط© ظپظٹط³ط¨ظˆظƒ (ط¹ط±ط¨ظٹ)', desc: 'ظ…طھط§ط¨ط¹ظٹظ† ط¹ط±ط¨ ط­ظ‚ظٹظ‚ظٹظٹظ† ظ„ظ„طµظپط­ط©.', price: 1.8, lang: 'ar', min: 100, max: 20000, speed: 'ظ…طھظˆط³ط·', quality: 'ط¹ط§ظ„ظٹ' },
+  { id: 13, cat: 'facebook', title: 'ظ„ط§ظٹظƒط§طھ ظ…ظ†ط´ظˆط± ظپظٹط³ط¨ظˆظƒ', desc: 'ظ„ط§ظٹظƒط§طھ ط¹ط±ط¨ظٹط© ط¹ظ„ظ‰ ط§ظ„ظ…ظ†ط´ظˆط±ط§طھ.', price: 0.7, lang: 'ar', min: 50, max: 10000, speed: 'ط³ط±ظٹط¹', quality: 'ط¹ط§ط¯ظٹ' },
+  { id: 14, cat: 'twitter', title: 'ظ…طھط§ط¨ط¹ظٹظ† طھظˆظٹطھط± (ط£ط¬ظ†ط¨ظٹ)', desc: 'ظ…طھط§ط¨ط¹ظٹظ† ط£ط¬ط§ظ†ط¨طŒ ط¬ظˆط¯ط© ط¹ط§ظ„ظٹط©.', price: 1.1, lang: 'en', min: 100, max: 50000, speed: 'ظ…طھظˆط³ط·', quality: 'ط¹ط§ظ„ظٹ' },
+];
 
-/* تحويل: سعر كل 1000 (ل.س) */
-function pricePer1000SYP(price_usd){
-  return Math.ceil(price_usd * EXCHANGE_RATE);
-}
+let currentCategory = CATEGORIES[0].id;
+let currentLang = 'all';
+let currentServiceId = null;
+let currentPriceUSD = 0;
+let orderCounter = Number(localStorage.getItem('mazen_order_counter') || 1000);
 
-/* helper escape */
-function esc(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-/* ================= UI BUILD ================= */
-const servicesContainer = document.getElementById('servicesContainer');
-
-function platformIcon(platform, size=18){
-  switch(platform){
-    case 'facebook': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 8.5H13.75C13.1111 8.5 12.75 8.86111 12.75 9.5V11H15.5L15 13.5H12.75V20H10V13.5H8.5V11H10V9C10 7.067 11.343 6 13.25 6H15.5V8.5Z" fill="#fff"/></svg>`;
-    case 'instagram': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#dd2a7b"/></svg>`;
-    case 'tiktok': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#000"/></svg>`;
-    case 'youtube': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#FF0000"/></svg>`;
-    case 'twitter': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#1DA1F2"/></svg>`;
-    case 'telegram': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#0088CC"/></svg>`;
-    default: return `<div style="width:${size}px;height:${size}px;background:rgba(255,255,255,0.02);border-radius:4px"></div>`;
-  }
-}
+function esc(str){ if(!str) return ''; return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
+function pricePer1000SYP(priceUSD){ return Math.ceil(priceUSD * USD_TO_SYP_RATE); }
 
 function buildCategories(){
-  const cats = Array.from(new Set(SERVICES.map(s=>s.platform)));
   const bar = document.getElementById('categoryBar');
-  bar.innerHTML = '';
-  for(const p of PLATFORM_ORDER){
-    if(!cats.includes(p)) continue;
-    const btn = document.createElement('button');
-    btn.className = 'cat-btn' + (p==='facebook' ? ' active' : '');
-    btn.innerHTML = `<div style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.02)">${platformIcon(p,18)}</div><span style="min-width:80px;text-align:left;display:inline-block;margin-right:6px">${PLATFORM_LABEL[p]||p}</span>`;
-    btn.onclick = ()=>{ document.querySelectorAll('.cat-btn').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); renderServices(p); };
-    bar.appendChild(btn);
-  }
+  bar.innerHTML = CATEGORIES.map(c => {
+    const isActive = c.id === currentCategory ? 'active' : '';
+    return `<button class="cat-btn ${isActive}" onclick="setCategory('${c.id}')" role="tab" aria-selected="${isActive ? 'true' : 'false'}">
+      ${c.icon}
+      <span>${c.title}</span>
+    </button>`;
+  }).join('');
 }
 
-function renderServices(platform='facebook'){
-  servicesContainer.innerHTML = '';
-  const list = SERVICES.filter(s=>s.platform===platform);
-  if(list.length===0){
-    servicesContainer.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">لا توجد خدمات في هذا القسم</div>`;
+function setCategory(cat){
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.cat-btn[onclick="setCategory('${cat}')"]`).classList.add('active');
+  renderServices();
+}
+
+function setLang(lang){
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  let idSuffix = '';
+  if(lang === 'all') idSuffix = 'all';
+  else if(lang === 'arabic') idSuffix = 'ar';
+  else if(lang === 'foreign') idSuffix = 'en';
+  const activeBtn = document.getElementById('lg_'+idSuffix);
+  if(activeBtn) activeBtn.classList.add('active');
+  renderServices();
+}
+
+function renderServices(){
+  const container = document.getElementById('servicesContainer');
+  const filteredByCategory = SERVICES.filter(s => s.cat === currentCategory);
+  const filteredByLang = filteredByCategory.filter(s => {
+    const serviceLang = s.lang ? s.lang.toLowerCase() : 'unknown';
+    if(currentLang === 'all') return true;
+    if(currentLang === 'arabic' && serviceLang === 'ar') return true;
+    if(currentLang === 'foreign' && serviceLang === 'en') return true;
+    return false;
+  });
+  
+  if(filteredByLang.length === 0){
+    container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--muted); font-size: 18px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color);">
+      ظ„ط§ طھظˆط¬ط¯ ط®ط¯ظ…ط§طھ ظ…طھط§ط­ط© ط­ط§ظ„ظٹط§ظ‹ ظپظٹ ظ‡ط°ط§ ط§ظ„ظ‚ط³ظ… ط¨ط§ظ„ظ„ط؛ط© ط§ظ„ظ…ط­ط¯ط¯ط©.
+    </div>`;
     return;
   }
-  for(const s of list){
-    const price1000 = pricePer1000SYP(s.price_usd);
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div class="icon-wrap">${platformIcon(s.platform,22)}</div>
-        <div style="flex:1">
-          <h3>${esc(s.title)}</h3>
-          <div class="desc">${esc(s.desc)}</div>
-          <div style="margin-top:8px"><span class="badge">${s.language==='arabic'?'عربي':'أجنبي'}</span></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:10px">
-        <div style="font-weight:800;color:var(--accent-cta)">${price1000.toLocaleString()} ل.س / 1000</div>
-        <div class="actions">
-          <a class="btn btn-wa" href="javascript:void(0)" onclick="openOrder('${s.id}')">اطلب الآن</a>
-          <button class="btn-details" onclick="showDetails('${s.id}')">تفاصيل</button>
+  
+  container.innerHTML = filteredByLang.map(s => {
+    const icon = CATEGORIES.find(c => c.id === s.cat)?.icon || '';
+    const priceSYP = pricePer1000SYP(s.price);
+    
+    return `
+      <div class="card" onclick="openOrder(${s.id})">
+        <div class="card-content">
+          <div class="left">
+            <div class="icon-wrap">${icon}</div>
+            <div>
+              <h3>${esc(s.title)}</h3>
+              <p class="desc">${esc(s.desc)}</p>
+              <div class="badges">
+                <span class="badge">ط§ظ„ط³ط±ط¹ط©: ${esc(s.speed)}</span>
+                <span class="badge">ط§ظ„ط¬ظˆط¯ط©: ${esc(s.quality)}</span>
+                <span class="badge">ط§ظ„ط­ط¯ ط§ظ„ط£ط¯ظ†ظ‰: ${s.min.toLocaleString()}</span>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <div class="price">${priceSYP.toLocaleString()} ظ„.ط³ / 1000</div>
+            <button class="btn btn-wa" onclick="event.stopPropagation(); openOrder(${s.id})">ط§ط·ظ„ط¨ ط§ظ„ط¢ظ†</button>
+            <button class="btn btn-details" onclick="event.stopPropagation(); openOrder(${s.id})">ط§ظ„طھظپط§طµظٹظ„</button>
+          </div>
         </div>
       </div>
     `;
-    servicesContainer.appendChild(card);
+  }).join('');
+  
+  if(EFFECTS.tilt){
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', handleTilt);
+      card.addEventListener('mouseleave', resetTilt);
+    });
   }
 }
 
-/* init UI */
-buildCategories();
-renderServices();
-
-/* ==================== Modal logic & Orders storage ==================== */
-let currentPriceUSD = 0;
-let currentServiceId = null;
-let orderCounter = Number(localStorage.getItem('mazen_order_counter') || 90534);
-
-/* load last saved fields */
-function loadLastFields(){
-  try{
-    const last = JSON.parse(localStorage.getItem('mazen_last_order') || '{}');
-    if(last.qty) document.getElementById('orderQty').value = last.qty;
-    if(last.link) document.getElementById('orderLinkAuto').value = last.link;
-    if(last.method) document.getElementById('paymentMethodAuto').value = last.method;
-    if(last.code) document.getElementById('transferCodeAuto').value = last.code;
-  }catch(e){}
+function handleTilt(e){
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+  const tiltX = (centerY - y) / 15;
+  const tiltY = (x - centerX) / 15;
+  card.style.setProperty('--tiltX', `${tiltX}deg`);
+  card.style.setProperty('--tiltY', `${tiltY}deg`);
 }
-loadLastFields();
+
+function resetTilt(e){
+  const card = e.currentTarget;
+  card.style.setProperty('--tiltX', '0deg');
+  card.style.setProperty('--tiltY', '0deg');
+}
 
 function openOrder(serviceId){
-  const s = SERVICES.find(x=>x.id === serviceId);
-  if(!s){ alert('خطأ: الخدمة غير موجودة'); return; }
-  currentPriceUSD = Number(s.price_usd) || 0;
+  const service = SERVICES.find(s => s.id === serviceId);
+  if(!service) return;
+  
   currentServiceId = serviceId;
-  document.getElementById("modalTitle").textContent = s.title || 'طلب خدمة';
-  document.getElementById("modalService").textContent = s.desc || s.platform || '';
-  document.getElementById("modalPlatformIcon").innerHTML = platformIcon(s.platform,28);
-  document.getElementById("modalPlatformIcon").classList.add('neon');
-  // reset / load
-  loadLastFields();
-  updateAutoPrice();
-  document.getElementById("orderModal").style.display = "flex";
-  document.getElementById("orderModal").setAttribute('aria-hidden','false');
-  showPaymentInfo();
+  currentPriceUSD = service.price;
+  
+  document.getElementById('modalTitle').innerText = `ط·ظ„ط¨ ط®ط¯ظ…ط©: ${service.title}`;
+  document.getElementById('modalDesc').innerHTML = `<strong>ط§ظ„ظˆطµظپ:</strong> ${service.desc}`;
+  document.getElementById('modalMinMax').innerHTML = `<strong>ط§ظ„ط­ط¯ظˆط¯:</strong> ظ…ظ† ${service.min.toLocaleString()} ط¥ظ„ظ‰ ${service.max.toLocaleString()} - <strong>ط§ظ„ط³ط¹ط±:</strong> ${pricePer1000SYP(service.price).toLocaleString()} ظ„.ط³ / 1000`;
+  
+  const lastOrder = JSON.parse(localStorage.getItem('mazen_last_order') || '{}');
+  document.getElementById('orderQty').value = lastOrder.qty || service.min;
+  document.getElementById('orderLinkAuto').value = lastOrder.link || '';
+
+  document.getElementById('paymentMethodAuto').value = lastOrder.method || 'syr';
+  
+  updatePrice();
+  
+  document.getElementById('orderModal').style.display = 'flex';
+  document.getElementById('orderModal').setAttribute('aria-hidden','false');
 }
 
 function closeOrder(){
-  document.getElementById("orderModal").style.display = "none";
-  document.getElementById("orderModal").setAttribute('aria-hidden','true');
-  const ico = document.getElementById("modalPlatformIcon");
-  if(ico) ico.classList.remove('neon');
+  document.getElementById('orderModal').style.display = 'none';
+  document.getElementById('orderModal').setAttribute('aria-hidden','true');
 }
 
-/* update price shown in modal (in ل.س) */
-function updateAutoPrice(){
-  const qty = Number(document.getElementById("orderQty").value || 0);
-  if(!currentServiceId || !qty || qty < 100){
-    document.getElementById("autoPriceBox").textContent = "0 ل.س";
-    return;
-  }
-  // base per 1000 in ل.س
+function updatePrice(){
+  const qty = Number(document.getElementById('orderQty').value || 0);
   const basePer1000 = pricePer1000SYP(currentPriceUSD);
-  const total = Math.ceil((qty / 1000) * basePer1000);
-  document.getElementById("autoPriceBox").textContent = total.toLocaleString() + " ل.س";
+  const total = Math.ceil((qty/1000) * basePer1000);
+  document.getElementById('totalPrice').innerText = `${total.toLocaleString()} ظ„.ط³`;
 }
 
-/* show payment info area */
-function showPaymentInfo(){
-  const method = document.getElementById('paymentMethodAuto').value;
-  const infoEl = document.getElementById('paymentInfo');
-  if(method === 'syr'){
-    infoEl.innerHTML = `سيريتل كاش: <strong id="syrNumberInline">${SYRITEL_NUMBER}</strong> · ضع كود التحويل في حقل "كود عملية التحويل"`;
-  } else {
-    infoEl.innerHTML = `شام كاش (كود): <strong id="shamCodeInline">${SHAM_CODE}</strong> · ضع كود التحويل في حقل "كود عملية التحويل"`;
-  }
-}
+document.getElementById('orderQty').addEventListener('input', updatePrice);
 
-/* validate */
-function validateInputs(){
+function validateInputs(checkTransferCode = true){
+  const service = SERVICES.find(s => s.id === currentServiceId);
+  if(!service) return false;
+  
   const link = document.getElementById('orderLinkAuto').value.trim();
   const qty = Number(document.getElementById('orderQty').value || 0);
-  const code = document.getElementById('transferCodeAuto').value.trim();
-  if(!link){ alert('يرجى إدخال رابط الحساب أو المنشور'); return false; }
-  if(!qty || qty < 100){ alert('الحد الأدنى 100'); return false; }
-  if(!code){ alert('يرجى إدخال كود عملية التحويل'); return false; }
+  const code = ''; // طھظ… ط¥ط²ط§ظ„ط© ط§ظ„ط­ظ‚ظ„ ظ…ظ† ط§ظ„ظ†ط§ظپط°ط© ط§ظ„ط£ظˆظ„ظ‰
+  
+  if(!link){ alert('ظٹط±ط¬ظ‰ ط¥ط¯ط®ط§ظ„ ط±ط§ط¨ط· ط§ظ„ط­ط³ط§ط¨ ط£ظˆ ط§ظ„ظ…ظ†ط´ظˆط±'); return false; }
+  if(!qty || qty < service.min){ alert(`ط§ظ„ط­ط¯ ط§ظ„ط£ط¯ظ†ظ‰ ظ„ظ„ظƒظ…ظٹط© ظ‡ظˆ ${service.min.toLocaleString()}`); return false; }
+  if(qty > service.max){ alert(`ط§ظ„ط­ط¯ ط§ظ„ط£ظ‚طµظ‰ ظ„ظ„ظƒظ…ظٹط© ظ‡ظˆ ${service.max.toLocaleString()}`); return false; }
+  
   return true;
 }
 
-/* save order to localStorage orders list */
 function saveOrderObject(order){
   const raw = localStorage.getItem('mazen_orders');
   const arr = raw ? JSON.parse(raw) : [];
   arr.push(order);
   localStorage.setItem('mazen_orders', JSON.stringify(arr));
-  // persist order counter
   localStorage.setItem('mazen_order_counter', String(order.orderId));
 }
 
-/* confirm & save order then show confirmation overlay */
+function copyToClipboard(text, elId) {
+  // Fallback for non-secure contexts or older browsers
+  if (!navigator.clipboard) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      const el = document.getElementById(elId);
+      const originalText = el.innerText;
+      el.innerText = 'طھظ… ط§ظ„ظ†ط³ط®!';
+      setTimeout(() => { el.innerText = originalText; }, 1500);
+    } catch (err) {
+      console.error('Could not copy text: ', err);
+      alert('ظپط´ظ„ ط§ظ„ظ†ط³ط®طŒ ظٹط±ط¬ظ‰ ط§ظ„ظ†ط³ط® ظٹط¯ظˆظٹط§ظ‹: ' + text);
+    }
+    document.body.removeChild(textarea);
+    return;
+  }
+  
+  // Modern approach
+  navigator.clipboard.writeText(text).then(() => {
+    const el = document.getElementById(elId);
+    const originalText = el.innerText;
+    el.innerText = 'طھظ… ط§ظ„ظ†ط³ط®!';
+    setTimeout(() => { el.innerText = originalText; }, 1500);
+  }).catch(err => {
+    console.error('Could not copy text: ', err);
+    alert('ظپط´ظ„ ط§ظ„ظ†ط³ط®طŒ ظٹط±ط¬ظ‰ ط§ظ„ظ†ط³ط® ظٹط¯ظˆظٹط§ظ‹: ' + text);
+  });
+}
+
 function confirmAndSend(){
-  if(!validateInputs()) return;
+  if(!validateInputs(false)) return;
+  
   const link = document.getElementById('orderLinkAuto').value.trim();
   const qty = Number(document.getElementById('orderQty').value || 0);
-  const code = document.getElementById('transferCodeAuto').value.trim();
+  const code = ''; // طھظ… ط¥ط²ط§ظ„ط© ط§ظ„ط­ظ‚ظ„ ظ…ظ† ط§ظ„ظ†ط§ظپط°ط© ط§ظ„ط£ظˆظ„ظ‰
   const pay = document.getElementById('paymentMethodAuto').value;
-  // compute total
+  
   const basePer1000 = pricePer1000SYP(currentPriceUSD);
   const total = Math.ceil((qty/1000) * basePer1000);
-  // generate id
+  
   const id = ++orderCounter;
-  // create order object
-  const service = SERVICES.find(x=>x.id === currentServiceId) || {title: '—'};
+  
+  const service = SERVICES.find(x=>x.id === currentServiceId) || {title: 'â€”'};
   const orderObj = {
     orderId: id,
     serviceId: currentServiceId,
@@ -542,61 +549,104 @@ function confirmAndSend(){
     link: link,
     transfer_code: code,
     payment_method: pay,
-    status: 'قيد المراجعة',
+    status: 'ظ‚ظٹط¯ ط§ظ„ظ…ط±ط§ط¬ط¹ط©',
     created_at: new Date().toISOString()
   };
-  // save last fields for convenience
-  localStorage.setItem('mazen_last_order', JSON.stringify({qty, link, code, method: pay}));
-  // save order in list
+  
+  localStorage.setItem('mazen_last_order', JSON.stringify({qty, link, method: pay}));
   saveOrderObject(orderObj);
-  // play sound
+  
   try{ document.getElementById('successSound').currentTime = 0; document.getElementById('successSound').play(); }catch(e){}
-  // show confirmation overlay
-  const confirmHTML = `
-    <h2 style="margin-top:0;margin-bottom:12px;color:var(--success)">✔ تم استلام طلبك</h2>
-    <div class="status-box">الحالة: <strong>${orderObj.status}</strong></div>
-    <div style="text-align:right;line-height:1.9;margin-top:12px;font-size:15px">
-      <b>المعرف:</b> <span style="color:var(--accent-cta)">${orderObj.orderId}</span><br>
-      <b>الخدمة:</b> ${esc(orderObj.serviceTitle)}<br>
-      <b>الرابط:</b> ${esc(orderObj.link)}<br>
-      <b>الكمية:</b> ${orderObj.qty.toLocaleString()}<br>
-      <b>التكلفة:</b> ${orderObj.total_lira.toLocaleString()} ل.س
+  
+  const paymentMethod = orderObj.payment_method;
+  let paymentValue = '';
+  let paymentLabel = '';
+  let paymentName = '';
+  
+  if (paymentMethod === 'syr') {
+    paymentValue = SYRITEL_NUMBER;
+    paymentLabel = 'ط±ظ‚ظ… ط³ظٹط±ظٹطھظ„ ظƒط§ط´';
+    paymentName = 'ط³ظٹط±ظٹطھظ„ ظƒط§ط´';
+  } else if (paymentMethod === 'sham') {
+    paymentValue = SHAM_CODE;
+    paymentLabel = 'ظƒظˆط¯ ط´ط§ظ… ظƒط§ط´';
+    paymentName = 'ط´ط§ظ… ظƒط§ط´';
+  }
+
+  const paymentDetailsHTML = `
+    <div style="margin-top:18px; padding-top:15px; border-top:1px solid var(--border-color);">
+      <h3 style="margin:0 0 10px; font-size:16px; color:var(--accent-cta);">ط®ط·ظˆط§طھ ط§ظ„ط¯ظپط¹:</h3>
+      <p style="margin:0 0 10px; font-size:14px; color:var(--muted);">ظٹط±ط¬ظ‰ طھط­ظˆظٹظ„ ظ…ط¨ظ„ط؛ <strong>${orderObj.total_lira.toLocaleString()} ظ„.ط³</strong> ط¥ظ„ظ‰ ${paymentName} ط¨ط§ط³طھط®ط¯ط§ظ… ط§ظ„طھظپط§طµظٹظ„ ط§ظ„طھط§ظ„ظٹط©:</p>
+      <div style="display:flex; align-items:center; justify-content:space-between; background:var(--card-bg); padding:10px; border-radius:8px; border:1px solid var(--border-color);">
+        <span style="font-weight:700; font-size:16px; color:var(--text);" id="paymentValue">${paymentValue}</span>
+        <button id="copyBtn" onclick="copyToClipboard('${paymentValue}', 'copyBtn')" style="padding:8px 12px; border-radius:6px; border:none; background:var(--accent1); color:#fff; font-weight:700; cursor:pointer; transition:background .2s ease;">ظ†ط³ط®</button>
+      </div>
+      <p style="margin:10px 0 0 0; font-size:13px; color:var(--muted);">ظٹط±ط¬ظ‰ ط¥طھظ…ط§ظ… ط¹ظ…ظ„ظٹط© ط§ظ„طھط­ظˆظٹظ„ ط£ظˆظ„ط§ظ‹. ط¨ط¹ط¯ ط§ظ„طھط­ظˆظٹظ„طŒ ط³طھط­طµظ„ ط¹ظ„ظ‰ ظƒظˆط¯ ط§ظ„ط¹ظ…ظ„ظٹط© ط§ظ„ط°ظٹ ظٹط¬ط¨ ط¥ط¯ط®ط§ظ„ظ‡ ظپظٹ ط§ظ„ط£ط³ظپظ„ ظ„ظ„ظ…طھط§ط¨ط¹ط© ط¥ظ„ظ‰ ظˆط§طھط³ط§ط¨.</p>
     </div>
-    <div style="margin-top:14px;font-size:13px;color:var(--muted)">احتفظ بالمعرف لتتبع حالة الطلب لاحقًا.</div>
-    <button onclick="sendWA(${orderObj.orderId})"
-      style="margin-top:18px;padding:12px 20px;border:none;border-radius:10px;background:#25D366;color:#032;font-size:16px;cursor:pointer;width:100%">متابعة إلى واتساب لإرسال التفاصيل</button>
+  `;
+
+  const confirmHTML = `
+    <h2 style="margin-top:0;margin-bottom:12px;color:var(--success)">âœ” طھظ… ط§ط³طھظ„ط§ظ… ط·ظ„ط¨ظƒ</h2>
+    <div class="status-box" style="background:rgba(34,197,94,0.12); border-color:rgba(34,197,94,0.28);">ط§ظ„ط­ط§ظ„ط©: <strong>${orderObj.status}</strong></div>
+    <div style="text-align:right;line-height:2;margin-top:18px;font-size:15px;border-top:1px solid var(--border-color); padding-top:15px;">
+      <b>ط§ظ„ظ…ط¹ط±ظپ:</b> <span style="color:var(--accent-cta); font-size:18px;">${orderObj.orderId}</span><br>
+      <b>ط§ظ„ط®ط¯ظ…ط©:</b> ${esc(orderObj.serviceTitle)}<br>
+      <b>ط§ظ„ط±ط§ط¨ط·:</b> ${esc(orderObj.link)}<br>
+      <b>ط§ظ„ظƒظ…ظٹط©:</b> ${orderObj.qty.toLocaleString()}<br>
+      <b>ط§ظ„طھظƒظ„ظپط©:</b> ${orderObj.total_lira.toLocaleString()} ظ„.ط³
+    </div>
+    ${paymentDetailsHTML}
+<div style="margin-top:18px;font-size:13px;color:var(--muted); border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+	      ط§ط­طھظپط¸ ط¨ط§ظ„ظ…ط¹ط±ظپ ظ„طھطھط¨ط¹ ط­ط§ظ„ط© ط§ظ„ط·ظ„ط¨ ظ„ط§ط­ظ‚ظ‹ط§.
+	    </div>
+	    <div id="transferCodeArea" style="margin-top:20px; padding:15px; border-radius:10px; background:rgba(255,209,102,0.1); border:1px solid rgba(255,209,102,0.2);">
+	      <p style="font-weight:700; margin-top:0; color:var(--text);">ط§ظ„ط®ط·ظˆط© ط§ظ„ط£ط®ظٹط±ط©: طھط£ظƒظٹط¯ ط§ظ„ط¯ظپط¹</p>
+	      <p style="font-size:13px; color:var(--muted); margin:4px 0 10px;">ط¨ط¹ط¯ ط¥طھظ…ط§ظ… ط§ظ„طھط­ظˆظٹظ„طŒ ط£ط¯ط®ظ„ ظƒظˆط¯ ط§ظ„ط¹ظ…ظ„ظٹط© ط§ظ„ط°ظٹ ظˆطµظ„ظƒ ط¨ط±ط³ط§ظ„ط© ظ†طµظٹط© ط«ظ… ط§ط¶ط؛ط· ط¹ظ„ظ‰ ط§ظ„ط²ط± ظ„ظ„ط¥ط±ط³ط§ظ„.</p>
+	      <input type="text" id="finalTransferCode" placeholder="ط£ط¯ط®ظ„ ظƒظˆط¯ ط¹ظ…ظ„ظٹط© ط§ظ„طھط­ظˆظٹظ„ ظ‡ظ†ط§" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid var(--border-color); background:var(--card-bg); color:var(--text);">
+	      <button onclick="sendWA(${orderObj.orderId})"
+	        style="margin-top:15px;padding:12px 20px;border:none;border-radius:10px;background:#25D366;color:#032;font-size:16px;cursor:pointer;width:100%;font-weight:800;">ط¥ط±ط³ط§ظ„ ط§ظ„طھظپط§طµظٹظ„ ظˆظƒظˆط¯ ط§ظ„طھط­ظˆظٹظ„ ط¥ظ„ظ‰ ظˆط§طھط³ط§ط¨</button>
+	    </div>
   `;
   document.getElementById('confirmCard').innerHTML = confirmHTML;
   document.getElementById('confirmBox').style.display = 'flex';
   document.getElementById('confirmBox').setAttribute('aria-hidden','false');
-  // close modal (but keep confirm open)
+  
   document.getElementById('orderModal').style.display = 'none';
   document.getElementById('orderModal').setAttribute('aria-hidden','true');
 }
 
-/* send to WhatsApp using saved order (find by id) */
 function sendWA(orderId){
-  const arr = JSON.parse(localStorage.getItem('mazen_orders') || '[]');
-  const o = arr.find(x=>x.orderId === orderId);
-  if(!o){
-    alert('خطأ: لم نتمكن من العثور على الطلب لإرساله.');
+  const finalCode = document.getElementById('finalTransferCode').value.trim();
+  if(!finalCode){
+    alert('ظٹط±ط¬ظ‰ ط¥ط¯ط®ط§ظ„ ظƒظˆط¯ ط¹ظ…ظ„ظٹط© ط§ظ„طھط­ظˆظٹظ„ ط§ظ„ط°ظٹ ظˆطµظ„ظƒ ط¨ط¹ط¯ ط§ظ„ط¯ظپط¹ ظ„ظ„ظ…طھط§ط¨ط¹ط©.');
     return;
   }
-  const paymentInfo = o.payment_method === 'syr' ? `سيريتل كاش: ${SYRITEL_NUMBER}` : `شام كاش (كود): ${SHAM_CODE}`;
-  const msg = `📝 طلب جديد\n\n`+
-              `🆔 المعرف: ${o.orderId}\n`+
-              `🔧 الخدمة: ${o.serviceTitle}\n`+
-              `🔢 الكمية: ${o.qty}\n`+
-              `💰 التكلفة: ${o.total_lira} ل.س\n`+
-              `📎 الرابط: ${o.link}\n`+
-              `🔑 كود التحويل: ${o.transfer_code}\n`+
-              `💳 الدفع: ${paymentInfo}\n\n(تم تقديم الطلب عبر واجهة MAZEN — الحالة: ${o.status})`;
+  
+  const arr = JSON.parse(localStorage.getItem('mazen_orders') || '[]');
+  let o = arr.find(x=>x.orderId === orderId);
+  
+  if(!o){
+    alert('ط®ط·ط£: ظ„ظ… ظ†طھظ…ظƒظ† ظ…ظ† ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط§ظ„ط·ظ„ط¨ ظ„ط¥ط±ط³ط§ظ„ظ‡.');
+    return;
+  }
+  
+  // طھط­ط¯ظٹط« ظƒظˆط¯ ط§ظ„طھط­ظˆظٹظ„ ظپظٹ ط§ظ„ط·ظ„ط¨ ط§ظ„ظ…ط®ط²ظ† ظ…ط­ظ„ظٹط§ظ‹
+  o.transfer_code = finalCode;
+  localStorage.setItem('mazen_orders', JSON.stringify(arr));
+  
+  const paymentInfo = o.payment_method === 'syr' ? `ط³ظٹط±ظٹطھظ„ ظƒط§ط´: ${SYRITEL_NUMBER}` : `ط´ط§ظ… ظƒط§ط´ (ظƒظˆط¯): ${SHAM_CODE}`;
+  const msg = `ًں“‌ ط·ظ„ط¨ ط¬ط¯ظٹط¯\n\n`+
+              `ًں†” ط§ظ„ظ…ط¹ط±ظپ: ${o.orderId}\n`+
+              `ًں”§ ط§ظ„ط®ط¯ظ…ط©: ${o.serviceTitle}\n`+
+              `ًں”¢ ط§ظ„ظƒظ…ظٹط©: ${o.qty.toLocaleString()}\n`+
+              `ًں’° ط§ظ„طھظƒظ„ظپط©: ${o.total_lira.toLocaleString()} ظ„.ط³\n`+
+              `ًں“ژ ط§ظ„ط±ط§ط¨ط·: ${o.link}\n`+
+              `ًں”‘ ظƒظˆط¯ ط§ظ„طھط­ظˆظٹظ„: ${finalCode}\n`+ // ط§ط³طھط®ط¯ط§ظ… finalCode ط§ظ„ط¬ط¯ظٹط¯
+              `ًں’³ ط§ظ„ط¯ظپط¹: ${paymentInfo}\n\n(طھظ… طھظ‚ط¯ظٹظ… ط§ظ„ط·ظ„ط¨ ط¹ط¨ط± ظˆط§ط¬ظ‡ط© MAZEN â€” ط§ظ„ط­ط§ظ„ط©: ${o.status})`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-  // hide confirm
   document.getElementById('confirmBox').style.display = 'none';
 }
 
-/* ================= Status checker (user can input ID and check) ================= */
 function openStatusChecker(){
   document.getElementById('statusChecker').style.display = 'flex';
   document.getElementById('statusChecker').setAttribute('aria-hidden','false');
@@ -611,51 +661,56 @@ function closeStatusChecker(){
 
 function checkOrderStatus(){
   const idStr = document.getElementById('statusOrderId').value.trim();
-  if(!idStr){ alert('أدخل معرف الطلب'); return; }
+  if(!idStr){ alert('ط£ط¯ط®ظ„ ظ…ط¹ط±ظپ ط§ظ„ط·ظ„ط¨'); return; }
   const id = Number(idStr);
   const arr = JSON.parse(localStorage.getItem('mazen_orders') || '[]');
   const o = arr.find(x=>x.orderId === id);
   const resultEl = document.getElementById('statusResult');
+  
+  resultEl.style.display = 'block';
+  
   if(!o){
-    resultEl.style.display = 'block';
-    resultEl.innerHTML = `<div style="color:var(--muted)">لم نتمكن من العثور على طلب بالمعرف: <strong>${esc(idStr)}</strong></div>`;
+    resultEl.style.background = 'rgba(255,0,0,0.12)';
+    resultEl.style.borderColor = 'rgba(255,0,0,0.28)';
+    resultEl.innerHTML = `<div style="color:var(--muted)">ظ„ظ… ظ†طھظ…ظƒظ† ظ…ظ† ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط·ظ„ط¨ ط¨ط§ظ„ظ…ط¹ط±ظپ: <strong>${esc(idStr)}</strong></div>`;
     return;
   }
-  resultEl.style.display = 'block';
+  
+  resultEl.style.background = 'rgba(43,130,255,0.1)';
+  resultEl.style.borderColor = 'rgba(43,130,255,0.3)';
   resultEl.innerHTML = `
     <div style="text-align:right;line-height:1.8">
-      <div><b>المعرف:</b> ${o.orderId}</div>
-      <div><b>الخدمة:</b> ${esc(o.serviceTitle)}</div>
-      <div><b>الكمية:</b> ${o.qty.toLocaleString()}</div>
-      <div><b>التكلفة:</b> ${o.total_lira.toLocaleString()} ل.س</div>
-      <div><b>الحالة:</b> ${o.status}</div>
-      <div><b>تاريخ الطلب:</b> ${new Date(o.created_at).toLocaleString()}</div>
+      <div><b>ط§ظ„ظ…ط¹ط±ظپ:</b> ${o.orderId}</div>
+      <div><b>ط§ظ„ط®ط¯ظ…ط©:</b> ${esc(o.serviceTitle)}</div>
+      <div><b>ط§ظ„ظƒظ…ظٹط©:</b> ${o.qty.toLocaleString()}</div>
+      <div><b>ط§ظ„طھظƒظ„ظپط©:</b> ${o.total_lira.toLocaleString()} ظ„.ط³</div>
+      <div><b>ط§ظ„ط­ط§ظ„ط©:</b> <strong style="color:var(--accent-cta);">${o.status}</strong></div>
+      <div><b>طھط§ط±ظٹط® ط§ظ„ط·ظ„ط¨:</b> ${new Date(o.created_at).toLocaleString()}</div>
     </div>
     <div style="margin-top:12px">
-      <button onclick="sendWA(${o.orderId})" class="btn" style="background:#25D366;color:#032;padding:9px 12px;border-radius:10px">إرسال التفاصيل إلى واتساب</button>
+      <button onclick="sendWA(${o.orderId})" class="btn btn-wa" style="padding:9px 12px;border-radius:10px;width:100%;">ط¥ط±ط³ط§ظ„ ط§ظ„طھظپط§طµظٹظ„ ط¥ظ„ظ‰ ظˆط§طھط³ط§ط¨</button>
     </div>
   `;
 }
 
-/* close overlays on outside click or ESC */
 document.addEventListener('click', (e)=>{
   const confirmBox = document.getElementById('confirmBox');
   if(confirmBox.style.display === 'flex' && e.target === confirmBox) confirmBox.style.display = 'none';
   const statusBox = document.getElementById('statusChecker');
-  if(statusBox.style.display === 'flex' && e.target === statusBox) statusBox.style.display = 'none';
+  if(statusBox.style.display === 'flex' && e.target === statusBox) closeStatusChecker();
+  const orderBox = document.getElementById('orderModal');
+  if(orderBox.style.display === 'flex' && e.target === orderBox) closeOrder();
 });
 document.addEventListener('keydown', e=>{
   if(e.key === 'Escape'){
     if(document.getElementById('confirmBox').style.display === 'flex') document.getElementById('confirmBox').style.display = 'none';
-    else if(document.getElementById('statusChecker').style.display === 'flex') document.getElementById('statusChecker').style.display = 'none';
+    else if(document.getElementById('statusChecker').style.display === 'flex') closeStatusChecker();
     else closeOrder();
   }
 });
 
-/* ==================== Effects (particles, snow, cursor) ==================== */
-const EFFECTS = { snow:true, particles:true, cursorGlow:true, tilt:true, neonLines:true };
+const EFFECTS = { snow:false, particles:true, cursorGlow:true, tilt:true, neonLines:true };
 
-/* cursor glow */
 const cursorEl = document.getElementById('cursorFollow');
 if(EFFECTS.cursorGlow){
   document.addEventListener('mousemove', (e)=>{
@@ -667,7 +722,6 @@ if(EFFECTS.cursorGlow){
   document.addEventListener('mouseup', ()=>{ cursorEl.style.transform = 'translate(-50%,-50%) scale(1)'; });
 } else cursorEl.style.display = 'none';
 
-/* particles */
 (function ParticleSystem(){
   if(!EFFECTS.particles) return;
   const canvas = document.getElementById('particleCanvas');
@@ -701,7 +755,6 @@ if(EFFECTS.cursorGlow){
   loop();
 })();
 
-/* snow sparkles */
 (function SnowSparkles(){
   if(!EFFECTS.snow) return;
   const canvas = document.getElementById('snowCanvas');
@@ -736,11 +789,9 @@ if(EFFECTS.cursorGlow){
   draw();
 })();
 
-/* header blur on scroll */
 const header = document.getElementById('siteHeader');
 window.addEventListener('scroll', ()=>{ const s = window.scrollY; if(s > 30) header.classList.add('scrolled'); else header.classList.remove('scrolled'); });
 
-/* ==================== Skeleton loader -> show ==================== */
 function showSkeletonThenLoad(){
   document.getElementById('skeletonArea').style.display = 'grid';
   document.getElementById('servicesContainer').style.display = 'none';
@@ -753,22 +804,21 @@ function showSkeletonThenLoad(){
 }
 showSkeletonThenLoad();
 
-/* theme toggle */
 let currentTheme = 'dark';
 document.getElementById('themeToggle').addEventListener('click', ()=>{
   if(currentTheme === 'dark'){
     document.documentElement.style.setProperty('--bg','#f6f8fb');
+    document.documentElement.style.setProperty('--panel','#ffffff');
     document.documentElement.style.setProperty('--muted','#556677');
     document.documentElement.style.setProperty('--text','#071122');
+    document.documentElement.style.setProperty('--card-bg','#ffffff');
+    document.documentElement.style.setProperty('--border-color','rgba(0,0,0,0.1)');
+    document.getElementById('themeToggle').innerText = 'âک€ï¸ڈ';
     currentTheme = 'light';
-    document.getElementById('themeToggle').innerText = '🌙';
   } else {
     location.reload();
   }
 });
-
-/* small helpers */
-function escapeQuotes(str){ if(!str) return ''; return String(str).replace(/'/g,"\\'").replace(/\n/g,' '); }
 
 </script>
 </body>
