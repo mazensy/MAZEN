@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>لوحة إدارة — MAZEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  body{font-family:"Tajawal",sans-serif;background:#071027;color:#eaf3ff;margin:0;padding:18px}
+  .card{background:linear-gradient(180deg,#081233,#0e1b3a);padding:14px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.03)}
+  h1{margin:0 0 14px}
+  input,select,textarea,button{font-family:inherit}
+  .row{display:flex;gap:8px;align-items:center}
+  .right{margin-left:auto}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:right}
+  .btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+  .btn-accept{background:#16a34a;color:#031e07}
+  .btn-reject{background:#ef4444;color:#fff}
+  .btn-edit{background:#3b82f6;color:#fff}
+  .small{font-size:13px;color:#9fb0d6}
+  .danger{color:#ffb4b4}
+  .info{color:#cbe8ff}
+  .filter-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .importarea{width:100%;min-height:80px}
+  .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:700}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>لوحة إدارة الطلبات — MAZEN</h1>
+    <div class="small">أدخل كلمة المرور للدخول إلى لوحة الإدارة</div>
+    <div style="margin-top:8px" class="row">
+      <input id="adminPass" placeholder="كلمة المرور" type="password" style="padding:10px;border-radius:8px;border:none;flex:1" />
+      <button id="loginBtn" class="btn" style="background:#7c3cff;color:white">دخول</button>
+      <div id="loginMsg" class="small right"></div>
+    </div>
+  </div>
+
+  <div id="adminArea" style="display:none">
+    <div class="card">
+      <div class="row">
+        <div>
+          <span class="pill">مفتاح التخزين: <strong>mazen_orders</strong></span>
+        </div>
+        <div class="right small">إجمالي الطلبات: <span id="count">0</span></div>
+      </div>
+
+      <div style="margin-top:12px" class="filter-row">
+        <select id="statusFilter" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04)">
+          <option value="all">الكل</option>
+          <option value="pending">قيد المراجعة</option>
+          <option value="accepted">مقبول</option>
+          <option value="rejected">مرفوض</option>
+        </select>
+
+        <input id="searchInput" placeholder="ابحث بالمعرف/الرابط/الاسم" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);flex:1" />
+        <button id="refreshBtn" class="btn" style="background:#1f2937;color:#fff">تحديث</button>
+        <button id="exportBtn" class="btn" style="background:#10b981;color:#032">تصدير JSON</button>
+      </div>
+
+      <div style="margin-top:12px;overflow:auto;max-height:420px">
+        <table id="ordersTable">
+          <thead>
+            <tr><th>المعرف</th><th>الخدمة</th><th>الكمية</th><th>التكلفة</th><th>الرابط</th><th>الحالة</th><th>إجراءات</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>استيراد / استعادة بيانات</h3>
+      <div class="small">يمكنك لصق JSON هنا لاستيراد الطلبات (يحذف الموجود ويستبدله)</div>
+      <textarea id="importArea" class="importarea" placeholder='[{"id":"90534","service":"...","qty":1500,"total":...}, ...]'></textarea>
+      <div style="margin-top:8px" class="row">
+        <button id="importBtn" class="btn" style="background:#f59e0b">استيراد</button>
+        <button id="clearBtn" class="btn danger" style="background:#ef4444;color:#fff">مسح كل الطلبات</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ====== إعداد: هاش كلمة المرور الذي زودت صاحب الموقع به (مقارنة SHA-256) ======
+// الهـاش الذي حسبناه لك قبل: c0bb238099b3e15732d971566d733ccd84fc9e40f7f559419e07f8918d8be111
+const ADMIN_HASH = 'c0bb238099b3e15732d971566d733ccd84fc9e40f7f559419e07f8918d8be111';
+const STORAGE_KEY = 'mazen_orders';
+
+// :: دالة SHA-256 بسيطة (Web Crypto API)
+async function sha256hex(msg){
+  const enc = new TextEncoder();
+  const data = enc.encode(msg);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  const arr = Array.from(new Uint8Array(hash));
+  return arr.map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// عناصر
+const loginBtn = document.getElementById('loginBtn');
+const adminPass = document.getElementById('adminPass');
+const loginMsg = document.getElementById('loginMsg');
+const adminArea = document.getElementById('adminArea');
+const ordersTableBody = document.querySelector('#ordersTable tbody');
+const countEl = document.getElementById('count');
+const statusFilter = document.getElementById('statusFilter');
+const searchInput = document.getElementById('searchInput');
+const refreshBtn = document.getElementById('refreshBtn');
+const exportBtn = document.getElementById('exportBtn');
+const importBtn = document.getElementById('importBtn');
+const importArea = document.getElementById('importArea');
+const clearBtn = document.getElementById('clearBtn');
+
+let orders = [];
+
+// login
+loginBtn.addEventListener('click', async ()=>{
+  const pass = adminPass.value || '';
+  loginMsg.textContent = 'جارٍ التحقق...';
+  const h = await sha256hex(pass);
+  if(h === ADMIN_HASH){
+    loginMsg.textContent = 'تم الدخول ✔';
+    adminArea.style.display = 'block';
+    document.querySelector('.card').scrollIntoView({behavior:'smooth'});
+    loadOrders();
+  }else{
+    loginMsg.textContent = 'كلمة المرور خاطئة';
+    setTimeout(()=> loginMsg.textContent = '', 2200);
+  }
+});
+
+// تحميل الطلبات من localStorage
+function loadOrders(){
+  try{
+    orders = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    if(!Array.isArray(orders)) orders = [];
+  }catch(e){
+    orders = [];
+  }
+  render();
+}
+
+// حفظ الطلبات
+function saveOrders(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+  render();
+}
+
+// عرض في الجدول
+function render(){
+  ordersTableBody.innerHTML = '';
+  const q = searchInput.value.trim().toLowerCase();
+  const st = statusFilter.value;
+  let filtered = orders.filter(o=>{
+    if(st !== 'all' && (o.status || 'pending') !== st) return false;
+    if(!q) return true;
+    // بحث في الحقول الشائعة
+    return (String(o.id || '') + ' ' + String(o.service || '') + ' ' + String(o.link || '')).toLowerCase().includes(q);
+  });
+  countEl.textContent = filtered.length;
+  for(const o of filtered.slice().reverse()){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${o.id || ''}</td>
+      <td>${escapeHTML(o.service||'')}</td>
+      <td>${o.qty || ''}</td>
+      <td>${(o.total || '')}</td>
+      <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis">${escapeHTML(o.link||'')}</td>
+      <td>${statusLabel(o.status || 'pending')}</td>
+      <td>
+        <button class="btn btn-accept" onclick="setStatus('${o.id}','accepted')">قبول</button>
+        <button class="btn btn-reject" onclick="promptReject('${o.id}')">رفض</button>
+        <button class="btn btn-edit" onclick="viewOrder('${o.id}')">عرض</button>
+      </td>
+    `;
+    ordersTableBody.appendChild(tr);
+  }
+}
+
+// مساعدة للعرض
+function statusLabel(s){
+  if(s==='accepted') return `<span style="color:#16a34a;font-weight:800">مقبول</span>`;
+  if(s==='rejected') return `<span style="color:#ef4444;font-weight:800">مرفوض</span>`;
+  return `<span style="color:#f59e0b;font-weight:800">قيد المراجعة</span>`;
+}
+
+// وضع الحالة
+window.setStatus = function(id, status){
+  const idx = orders.findIndex(x=>String(x.id) === String(id));
+  if(idx === -1) return alert('الطلب غير موجود');
+  orders[idx].status = status;
+  orders[idx].updated_at = new Date().toISOString();
+  saveOrders();
+  alert('تغيرت حالة الطلب إلى: ' + status);
+}
+
+// رفض مع سبب
+window.promptReject = function(id){
+  const reason = prompt('ادخل سبب الرفض (اختياري)');
+  if(reason === null) return;
+  const idx = orders.findIndex(x=>String(x.id) === String(id));
+  if(idx === -1) return alert('الطلب غير موجود');
+  orders[idx].status = 'rejected';
+  orders[idx].reject_reason = reason || '';
+  orders[idx].updated_at = new Date().toISOString();
+  saveOrders();
+  alert('تم رفض الطلب');
+}
+
+// عرض تفاصيل
+window.viewOrder = function(id){
+  const o = orders.find(x=>String(x.id) === String(id));
+  if(!o) return alert('الطلب غير موجود');
+  alert(JSON.stringify(o, null, 2));
+}
+
+// تصدير
+exportBtn.addEventListener('click', ()=>{
+  const data = JSON.stringify(orders, null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'mazen_orders_export.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+// استيراد
+importBtn.addEventListener('click', ()=>{
+  try{
+    const j = JSON.parse(importArea.value.trim() || '[]');
+    if(!Array.isArray(j)) throw new Error('JSON غير صالح (ليس مصفوفة)');
+    // استبدال كامل
+    orders = j;
+    saveOrders();
+    alert('تم استيراد الطلبات');
+  }catch(e){
+    alert('خطأ في استيراد JSON: ' + e.message);
+  }
+});
+
+// مسح الكل
+clearBtn.addEventListener('click', ()=>{
+  if(!confirm('هل أنت متأكد من مسح كل الطلبات؟')) return;
+  orders = [];
+  saveOrders();
+  alert('تم المسح');
+});
+
+// أدوات البحث / تحديث
+refreshBtn.addEventListener('click', loadOrders);
+searchInput.addEventListener('input', render);
+statusFilter.addEventListener('change', render);
+
+// تحميل عند البدء إذا تم تسجيل الدخول (إذا أردت مانع تغطية وضع تلقائي، نفعل الأمر بعد الدخول)
+function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// تحميل تلقائي إن وُجدت بيانات
+// (لن تُعرض إلا بعد إدخال كلمة المرور)
+loadOrders();
+</script>
+</body>
+</html>
