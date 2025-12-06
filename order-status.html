@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>تحقق حالة الطلب — MAZEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  body{font-family:"Tajawal",sans-serif;background:#071027;color:#eaf3ff;padding:20px}
+  .card{background:linear-gradient(180deg,#081233,#0e1b3a);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  input{padding:10px;border-radius:8px;border:none;width:100%;margin-top:8px}
+  .btn{padding:10px;border-radius:8px;border:none;background:#3b82f6;color:#fff;cursor:pointer;margin-top:8px}
+  .status{margin-top:14px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h2>تحقق من حالة طلبك</h2>
+    <div class="small">ادخل معرف الطلب الذي استلمته بعد التأكيد</div>
+    <input id="orderId" placeholder="مثال: 90534" />
+    <button id="checkBtn" class="btn">تحقق</button>
+    <div id="result" class="status" style="display:none"></div>
+    <div style="margin-top:12px" class="small">ملاحظة: إذا لم يظهر أي شيء، تأكد أن الإدارة استوردت/حفظت الطلبات في النظام (mazen_orders)</div>
+  </div>
+
+<script>
+const STORAGE_KEY = 'mazen_orders';
+const checkBtn = document.getElementById('checkBtn');
+const orderIdInput = document.getElementById('orderId');
+const result = document.getElementById('result');
+
+checkBtn.addEventListener('click', ()=>{
+  const id = orderIdInput.value.trim();
+  if(!id){ alert('ادخل معرف الطلب'); return; }
+  let orders = [];
+  try{ orders = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }catch(e){ orders = []; }
+  const o = orders.find(x=>String(x.id) === String(id));
+  if(!o){
+    result.style.display = 'block';
+    result.innerHTML = `<strong>لم يتم العثور على أي طلب بالمعرف ${id}</strong>`;
+    return;
+  }
+  result.style.display = 'block';
+  result.innerHTML = `
+    <div><strong>المعرف:</strong> ${o.id}</div>
+    <div><strong>الخدمة:</strong> ${o.service || ''}</div>
+    <div><strong>الكمية:</strong> ${o.qty || ''}</div>
+    <div><strong>التكلفة:</strong> ${o.total || ''}</div>
+    <div><strong>الحالة:</strong> ${o.status || 'قيد المراجعة'}</div>
+    ${o.reject_reason ? `<div style="color:#ffb4b4"><strong>سبب الرفض:</strong> ${o.reject_reason}</div>` : ''}
+    <div style="margin-top:8px"><a href="mailto:your@company.email" style="color:#cbe8ff">اتصل بالدعم</a></div>
+  `;
+});
+</script>
+</body>
+</html>
