@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MAZEN — Premium Social Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05050b;
+  --panel:#0b1220;
+  --muted:#98a6bf;
+  --text:#eaf3ff;
+  --accent1:#2b82ff;
+  --accent2:#7a3cff;
+  --accent-cta:#ffd166;
+  --glass: rgba(255,255,255,0.03);
+  --card-glow: 0 10px 40px rgba(58,88,255,0.12);
+  --neon: 0 6px 20px rgba(123,60,255,0.12);
+  --shadow: rgba(2,6,23,0.6);
+  --success: #22c55e;
+}
+/* Basic reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:"Tajawal",sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  background:
+    radial-gradient(800px 400px at 8% 12%, rgba(43,130,255,0.03), transparent),
+    radial-gradient(600px 300px at 92% 88%, rgba(122,60,255,0.02), transparent),
+    var(--bg);
+  color:var(--text); overflow-x:hidden;
+}  /* ===== Header (glass + dynamic blur) ===== */
+.header{
+position:sticky; top:0; z-index:1000;
+display:flex; align-items:center; justify-content:space-between;
+gap:12px; padding:14px 18px;
+backdrop-filter: blur(6px);
+background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));
+border-bottom: 1px solid rgba(255,255,255,0.03);
+transition:backdrop-filter .28s ease, background .28s ease;
+}
+.header.scrolled{ backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); }
+
+/* logo */
+.logo{display:flex; align-items:center; gap:12px}
+.sym{width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:22px; color:#fff; background:linear-gradient(135deg,var(--accent1),var(--accent2)); box-shadow:var(--card-glow)}
+.brand{font-weight:900}
+.tag{color:var(--muted); font-size:13px}
+
+/* container */
+.container{max-width:1180px; margin:20px auto; padding:0 18px}
+
+/* hero / intro */
+.hero{display:flex; justify-content:space-between; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
+.hero h1{margin:0; font-size:22px}
+.hero p{margin:6px 0 0 0; color:var(--muted); font-size:13px}
+
+/* top offers bar */
+.top-offer{display:flex; gap:10px; align-items:center; padding:10px 14px; border-radius:10px; background: linear-gradient(90deg,#ffd16611,#7a3cff11); border:1px solid rgba(255,255,255,0.02); color:var(--text); margin-bottom:12px; font-weight:700}
+.top-offer small{color:var(--muted); font-weight:600}
+
+/* layout controls */
+.controls{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px}
+
+/* category bar (tabs) */
+.category-bar{display:flex; gap:8px; flex-wrap:wrap}
+.cat-btn{
+display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
+background:transparent; color:var(--muted); font-weight:800; transition:transform .18s ease, box-shadow .18s ease;
+}
+.cat-btn svg{filter:drop-shadow(0 6px 20px rgba(0,0,0,0.5))}
+.cat-btn.active{ background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff; box-shadow: var(--neon); transform:translateY(-3px) }
+
+/* language filter */
+.lang-filter{display:flex; gap:8px; align-items:center}
+.lang-btn{padding:8px 12px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted); font-weight:700; cursor:pointer}
+.lang-btn.active{background:var(--accent1); color:#fff; border:none; box-shadow:0 8px 30px rgba(43,130,255,0.08)}
+
+/* search / actions */
+.actions-right{margin-left:auto; display:flex; gap:8px; align-items:center}
+
+/* cards grid */
+.cards{
+display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; margin-top:6px;
+}
+
+/* card style (glass + gradient border + 3D tilt) */
+.card{
+background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border-radius:14px; padding:14px; border:1px solid rgba(255,255,255,0.03);
+transition: transform .25s cubic-bezier(.2,.9,.25,1), box-shadow .25s ease;
+transform-style:preserve-3d;
+--tiltX:0deg; --tiltY:0deg;
+will-change:transform;
+position:relative; overflow:visible;
+}
+.card::after{
+content:""; position:absolute; inset:-1px; border-radius:15px; pointer-events:none;
+background:linear-gradient(90deg, transparent, rgba(123,60,255,0.06), transparent);
+opacity:0; transition:opacity .25s ease;
+}
+.card:hover{ transform: translateY(-10px) rotateX(var(--tiltX)) rotateY(var(--tiltY)); box-shadow: 0 30px 70px rgba(4,8,20,0.6); }
+.card:hover::after{ opacity:1 }
+
+/* card inner */
+.card .left{display:flex; gap:12px; align-items:flex-start}
+.icon-wrap{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02); flex-shrink:0}
+.card h3{margin:0 0 6px; font-size:16px}
+.card .desc{color:var(--muted); font-size:13px}
+.badges{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
+.badge{padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.02); color:var(--muted); font-size:12px; border:1px solid rgba(255,255,255,0.02)}
+.price{font-weight:800; color:var(--accent-cta); margin-top:10px; font-size:18px}
+
+/* actions column */
+.actions{display:flex; flex-direction:column; align-items:flex-end; gap:8px; min-width:150px}
+.btn{
+padding:9px 12px; border-radius:10px; cursor:pointer; font-weight:800; text-decoration:none; border: none;
+}
+.btn-wa{background:#25D366; color:#032}
+.btn-details{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04)}
+
+/* old modal (kept, but hidden/unused) */
+#orderModal_old{display:none}
+
+/* ========== NEW MODAL STYLES ========== */
+
+/* modal background */
+.modal-bg{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2200;
+  background:rgba(2,6,23,0.55);
+  backdrop-filter:blur(8px);
+}
+
+/* modal card */
+.modal-card{
+  width:94%; max-width:520px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border-radius:16px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 30px 80px rgba(0,0,0,0.6);
+  position:relative;
+  animation:slideUp .28s ease both;
+}
+
+/* close */
+.modal-close{
+  position:absolute; top:12px; left:12px;
+  width:40px; height:40px; border-radius:50%;
+  border:none; background:rgba(255,255,255,0.08); color:#fff; font-size:22px; cursor:pointer;
+}
+
+/* neon effect */
+.neon{
+  box-shadow: 0 0 12px rgba(0,213,255,0.14), 0 0 28px rgba(123,60,255,0.06);
+  border:1px solid rgba(0,213,255,0.18);
+}
+
+/* inputs inside modal */
+.modal-card input, .modal-card select{
+  width:100%; padding:12px; border-radius:10px; margin-top:6px; border:none;
+  background:rgba(0,0,0,0.45); color:var(--text);
+}
+
+/* price box */
+.price-box{
+  padding:12px; border-radius:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); margin-top:8px; font-weight:700;
+}
+
+/* confirm overlay */
+.confirm-box{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:2600; background:rgba(0,0,0,0.65); backdrop-filter:blur(6px)}
+.confirm-card{width:90%;max-width:420px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.12); text-align:right}
+
+/* status */
+.status-box{margin-top:12px;padding:10px;border-radius:10px;background:rgba(255,255,0,0.12);border:1px solid rgba(255,255,0,0.28);text-align:center}
+
+/* small status checker modal */
+.status-check-card{width:90%;max-width:480px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);text-align:right}
+
+/* responsive */
+@media (max-width:820px){
+.actions{min-width:110px}
+}
+
+/* tiny utility */
+.small{font-size:12px;color:var(--muted)}
+</style>
+
+</head>
+<body>
+<!-- custom cursor -->
+<div id="cursorFollow" class="cursor-follow" style="background:linear-gradient(90deg,var(--accent1),var(--accent2));width:18px;height:18px;position:fixed;left:0;top:0;border-radius:50%;pointer-events:none;z-index:2000;transform:translate(-50%,-50%);mix-blend-mode:screen;"></div>
+<header class="header" id="siteHeader">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="sym">M</div>
+    <div>
+      <div class="brand">MAZEN</div>
+      <div class="tag small">خدمات سوشيال — Premium</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="small">واتساب: <strong>+963 980 962 294</strong></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="checkStatusBtn" class="btn" title="تحقق من حالة طلبك" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 10px;border-radius:10px" onclick="openStatusChecker()">تحقق من الطلب</button>
+      <button id="themeToggle" class="btn" title="تبديل الثيم" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)">☀️</button>
+    </div>
+  </div>
+</header>
+<main class="container">
+  <section class="hero">
+    <div>
+      <h1>MAZEN — خدمات السوشيال (Premium)</h1>
+      <p class="small">واجهة داكنة فاخرة — تحكم بكل الخدمات والمؤثرات. اضغط على أي خدمة لطلبها عبر النظام الجديد.</p>
+    </div>
+    <div class="top-offer">
+      <svg width="20" height="20" viewBox="0 0 24 24" style="filter:drop-shadow(0 6px 20px rgba(0,0,0,0.4))"><path d="M12 2l2.6 6.9L21 9.2l-5 3.7L17 20l-5-3.3L7 20l1-7.1-5-3.7 6.4-0.3L12 2z" fill="#ffd166"/></svg>
+      <div style="line-height:1">
+        <div>عروض نهاية السنة</div>
+        <small>خصومات على باقات المتابعين — اطلب الآن</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="category-bar" id="categoryBar" role="tablist" aria-label="منصات التواصل"></div>
+    <div class="lang-filter" style="margin-left:auto">
+      <button id="lg_all" class="lang-btn active" onclick="setLang('all')">الكل</button>
+      <button id="lg_ar" class="lang-btn" onclick="setLang('arabic')">عربي</button>
+      <button id="lg_en" class="lang-btn" onclick="setLang('foreign')">أجنبي</button>
+    </div>
+  </div>
+
+  <!-- skeleton loader -->
+  <div id="skeletonArea" class="skeleton-grid" aria-hidden="false">
+    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
+    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
+    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
+    <div class="skel" style="height:120px;border-radius:12px;background:linear-gradient(90deg,#0b1220,#0f1724,#0b1220);"></div>
+  </div>
+
+  <!-- services -->
+  <div id="servicesContainer" class="cards" aria-live="polite" style="display:none"></div>
+
+  <footer class="footer">
+    © MAZEN — كل الحقوق محفوظة — تواصل: +963980962294 — <a href="#" style="color:var(--muted);text-decoration:none">سياسة الخصوصية</a>
+  </footer>
+</main>
+
+<!-- =========================
+     ORDER MODAL
+     ========================= -->
+<div id="orderModal" class="modal-bg" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close" onclick="closeOrder()">×</button>
+
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+      <div id="modalPlatformIcon" style="width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05)"></div>
+      <div>
+        <h3 id="modalTitle" style="margin:0">طلب خدمة</h3>
+        <div id="modalService" class="small" style="color:var(--muted)"></div>
+      </div>
+    </div>
+
+    <label class="small">رابط الحساب / المنشور</label>
+    <input id="orderLinkAuto" placeholder="ضع رابط الحساب أو رابط المنشور" />
+
+    <label class="small" style="margin-top:12px">الكمية المطلوبة (الحد الأدنى 100)</label>
+    <input id="orderQty" type="number" placeholder="مثال: 1500" oninput="updateAutoPrice()" min="100" />
+
+    <label class="small" style="margin-top:12px">السعر الكلي</label>
+    <div id="autoPriceBox" class="price-box">0 ل.س</div>
+
+    <label class="small" style="margin-top:12px">طريقة الدفع</label>
+    <select id="paymentMethodAuto" style="margin-top:6px" onchange="showPaymentInfo()">
+      <option value="syr">سيريتل كاش</option>
+      <option value="sham">شام كاش</option>
+    </select>
+
+    <div id="paymentInfo" class="small" style="margin-top:8px;color:var(--muted)">سيريتل كاش: <strong id="syrNumberInline">0980962294</strong> · شام كاش: <strong id="shamCodeInline">bc6cc5f8ce57b34373d251b964853432</strong></div>
+
+    <label class="small" style="margin-top:12px">كود عملية التحويل</label>
+    <input id="transferCodeAuto" placeholder="مثال: 123456" style="margin-top:6px" />
+
+    <div style="margin-top:16px;display:flex;gap:10px">
+      <button onclick="confirmAndSend()" class="btn" style="flex:1;background:linear-gradient(135deg,#3b82f6,#2563eb);box-shadow:0 0 18px rgba(59,130,246,0.25)">تأكيد الطلب</button>
+      <button onclick="closeOrder()" class="btn" style="flex:0.6;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">إلغاء</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- confirmation overlay -->
+<div id="confirmBox" class="confirm-box" aria-hidden="true">
+  <div class="confirm-card" id="confirmCard"></div>
+</div>
+
+<!-- status checker overlay -->
+<div id="statusChecker" class="confirm-box" aria-hidden="true">
+  <div class="status-check-card" id="statusCheckCard" style="text-align:right">
+    <h3 style="margin-top:0">تحقق من حالة الطلب</h3>
+    <p class="small">أدخل معرف الطلب (ID) الذي حصلت عليه بعد تأكيد الطلب.</p>
+    <input id="statusOrderId" placeholder="مثال: 90534" style="margin-top:8px;padding:10px;border-radius:8px;border:none;background:rgba(0,0,0,0.45);color:var(--text)" />
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button onclick="checkOrderStatus()" class="btn" style="flex:1;background:linear-gradient(135deg,#7a3cff,#2b82ff);color:#fff">تحقق</button>
+      <button onclick="closeStatusChecker()" class="btn" style="flex:0.6;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">إغلاق</button>
+    </div>
+    <div id="statusResult" style="margin-top:12px;display:none"></div>
+  </div>
+</div>
+
+<!-- confirmation sound -->
+<audio id="successSound" preload="auto">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-confirmation-tone-2861.mp3" type="audio/mpeg">
+</audio>
+
+<!-- canvases for effects -->
+<canvas id="particleCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:5"></canvas>
+<canvas id="snowCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:6"></canvas>
+
+<script>
+/* ==================== CONFIG & DATA ==================== */
+/* تغيير سعر الصرف هنا — ضع سعر السوق الحالي */
+const EXCHANGE_RATE = 2500; // ليرة سورية لكل 1 USD — غيّره حسب السوق
+
+/* أرقام الدفع (مضمنة) */
+const SYRITEL_NUMBER = '0980962294';
+const SHAM_CODE = 'bc6cc5f8ce57b34373d251b964853432';
+
+/* WhatsApp */
+const WA_NUMBER = '963980962294'; // بدون + — استخدم لصيغة wa.me
+
+/* الخدمات (الأسعار مُخزنة بالدولار لكل 1000) */
+const SERVICES = [
+  {id:'fb_ar_1', platform:'facebook', title:'متابعين فيسبوك — عربي', desc:'حسابات عربية نشطة • ضمان 30 يوم', price_usd:1.50, language:'arabic', packages:[{label:'1k',mult:1},{label:'5k',mult:5},{label:'10k',mult:10}]},
+  {id:'fb_en_1', platform:'facebook', title:'لايكات فيسبوك — أجنبي', desc:'لايكات سريعة • جودة جيدة', price_usd:0.31, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]},
+
+  {id:'ig_ar_1', platform:'instagram', title:'تصميم منشورات إنستغرام', desc:'حزمة 10 منشورات • PSD • تعديل 2 مرة', price_usd:40, language:'arabic', packages:[{label:'حزمة',mult:1}]},
+  {id:'ig_en_1', platform:'instagram', title:'متابعين إنستغرام — أجنبي', desc:'جودة عالية • بدء سريع', price_usd:1.4, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]},
+
+  {id:'tk_en_1', platform:'tiktok', title:'متابعين تيك توك', desc:'جودة ممتازة • بدء سريع', price_usd:1.2, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]},
+
+  {id:'yt_en_1', platform:'youtube', title:'مشاهدات يوتيوب', desc:'مشاهدات حقيقية • مدة كاملة', price_usd:1.5, language:'foreign', packages:[{label:'1k',mult:1},{label:'10k',mult:10}]},
+
+  {id:'tw_en_1', platform:'twitter', title:'متابعين تويتر (X)', desc:'زيادة متابعات • متوافق', price_usd:1.1, language:'foreign', packages:[{label:'1k',mult:1}]},
+
+  {id:'sc_en_1', platform:'snapchat', title:'خدمة سناب شات', desc:'متابعات وترويج سناب', price_usd:1.8, language:'foreign', packages:[{label:'1k',mult:1}]},
+
+  {id:'tg_en_1', platform:'telegram', title:'أعضاء قناة تيليجرام', desc:'أعضاء نشطين • خيارات متعددة', price_usd:0.9, language:'foreign', packages:[{label:'1k',mult:1},{label:'5k',mult:5}]}
+];
+
+const PLATFORM_ORDER = ['facebook','instagram','tiktok','youtube','twitter','snapchat','telegram'];
+const PLATFORM_LABEL = {
+  facebook:'فيسبوك', instagram:'إنستغرام', tiktok:'تيك توك', youtube:'يوتيوب',
+  twitter:'تويتر', snapchat:'سناب شات', telegram:'تيليجرام'
+};
+
+/* تحويل: سعر كل 1000 (ل.س) */
+function pricePer1000SYP(price_usd){
+  return Math.ceil(price_usd * EXCHANGE_RATE);
+}
+
+/* helper escape */
+function esc(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ================= UI BUILD ================= */
+const servicesContainer = document.getElementById('servicesContainer');
+
+function platformIcon(platform, size=18){
+  switch(platform){
+    case 'facebook': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 8.5H13.75C13.1111 8.5 12.75 8.86111 12.75 9.5V11H15.5L15 13.5H12.75V20H10V13.5H8.5V11H10V9C10 7.067 11.343 6 13.25 6H15.5V8.5Z" fill="#fff"/></svg>`;
+    case 'instagram': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#dd2a7b"/></svg>`;
+    case 'tiktok': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#000"/></svg>`;
+    case 'youtube': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#FF0000"/></svg>`;
+    case 'twitter': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#1DA1F2"/></svg>`;
+    case 'telegram': return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#0088CC"/></svg>`;
+    default: return `<div style="width:${size}px;height:${size}px;background:rgba(255,255,255,0.02);border-radius:4px"></div>`;
+  }
+}
+
+function buildCategories(){
+  const cats = Array.from(new Set(SERVICES.map(s=>s.platform)));
+  const bar = document.getElementById('categoryBar');
+  bar.innerHTML = '';
+  for(const p of PLATFORM_ORDER){
+    if(!cats.includes(p)) continue;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (p==='facebook' ? ' active' : '');
+    btn.innerHTML = `<div style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.02)">${platformIcon(p,18)}</div><span style="min-width:80px;text-align:left;display:inline-block;margin-right:6px">${PLATFORM_LABEL[p]||p}</span>`;
+    btn.onclick = ()=>{ document.querySelectorAll('.cat-btn').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); renderServices(p); };
+    bar.appendChild(btn);
+  }
+}
+
+function renderServices(platform='facebook'){
+  servicesContainer.innerHTML = '';
+  const list = SERVICES.filter(s=>s.platform===platform);
+  if(list.length===0){
+    servicesContainer.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">لا توجد خدمات في هذا القسم</div>`;
+    return;
+  }
+  for(const s of list){
+    const price1000 = pricePer1000SYP(s.price_usd);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div class="icon-wrap">${platformIcon(s.platform,22)}</div>
+        <div style="flex:1">
+          <h3>${esc(s.title)}</h3>
+          <div class="desc">${esc(s.desc)}</div>
+          <div style="margin-top:8px"><span class="badge">${s.language==='arabic'?'عربي':'أجنبي'}</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:10px">
+        <div style="font-weight:800;color:var(--accent-cta)">${price1000.toLocaleString()} ل.س / 1000</div>
+        <div class="actions">
+          <a class="btn btn-wa" href="javascript:void(0)" onclick="openOrder('${s.id}')">اطلب الآن</a>
+          <button class="btn-details" onclick="showDetails('${s.id}')">تفاصيل</button>
+        </div>
+      </div>
+    `;
+    servicesContainer.appendChild(card);
+  }
+}
+
+/* init UI */
+buildCategories();
+renderServices();
+
+/* ==================== Modal logic & Orders storage ==================== */
+let currentPriceUSD = 0;
+let currentServiceId = null;
+let orderCounter = Number(localStorage.getItem('mazen_order_counter') || 90534);
+
+/* load last saved fields */
+function loadLastFields(){
+  try{
+    const last = JSON.parse(localStorage.getItem('mazen_last_order') || '{}');
+    if(last.qty) document.getElementById('orderQty').value = last.qty;
+    if(last.link) document.getElementById('orderLinkAuto').value = last.link;
+    if(last.method) document.getElementById('paymentMethodAuto').value = last.method;
+    if(last.code) document.getElementById('transferCodeAuto').value = last.code;
+  }catch(e){}
+}
+loadLastFields();
+
+function openOrder(serviceId){
+  const s = SERVICES.find(x=>x.id === serviceId);
+  if(!s){ alert('خطأ: الخدمة غير موجودة'); return; }
+  currentPriceUSD = Number(s.price_usd) || 0;
+  currentServiceId = serviceId;
+  document.getElementById("modalTitle").textContent = s.title || 'طلب خدمة';
+  document.getElementById("modalService").textContent = s.desc || s.platform || '';
+  document.getElementById("modalPlatformIcon").innerHTML = platformIcon(s.platform,28);
+  document.getElementById("modalPlatformIcon").classList.add('neon');
+  // reset / load
+  loadLastFields();
+  updateAutoPrice();
+  document.getElementById("orderModal").style.display = "flex";
+  document.getElementById("orderModal").setAttribute('aria-hidden','false');
+  showPaymentInfo();
+}
+
+function closeOrder(){
+  document.getElementById("orderModal").style.display = "none";
+  document.getElementById("orderModal").setAttribute('aria-hidden','true');
+  const ico = document.getElementById("modalPlatformIcon");
+  if(ico) ico.classList.remove('neon');
+}
+
+/* update price shown in modal (in ل.س) */
+function updateAutoPrice(){
+  const qty = Number(document.getElementById("orderQty").value || 0);
+  if(!currentServiceId || !qty || qty < 100){
+    document.getElementById("autoPriceBox").textContent = "0 ل.س";
+    return;
+  }
+  // base per 1000 in ل.س
+  const basePer1000 = pricePer1000SYP(currentPriceUSD);
+  const total = Math.ceil((qty / 1000) * basePer1000);
+  document.getElementById("autoPriceBox").textContent = total.toLocaleString() + " ل.س";
+}
+
+/* show payment info area */
+function showPaymentInfo(){
+  const method = document.getElementById('paymentMethodAuto').value;
+  const infoEl = document.getElementById('paymentInfo');
+  if(method === 'syr'){
+    infoEl.innerHTML = `سيريتل كاش: <strong id="syrNumberInline">${SYRITEL_NUMBER}</strong> · ضع كود التحويل في حقل "كود عملية التحويل"`;
+  } else {
+    infoEl.innerHTML = `شام كاش (كود): <strong id="shamCodeInline">${SHAM_CODE}</strong> · ضع كود التحويل في حقل "كود عملية التحويل"`;
+  }
+}
+
+/* validate */
+function validateInputs(){
+  const link = document.getElementById('orderLinkAuto').value.trim();
+  const qty = Number(document.getElementById('orderQty').value || 0);
+  const code = document.getElementById('transferCodeAuto').value.trim();
+  if(!link){ alert('يرجى إدخال رابط الحساب أو المنشور'); return false; }
+  if(!qty || qty < 100){ alert('الحد الأدنى 100'); return false; }
+  if(!code){ alert('يرجى إدخال كود عملية التحويل'); return false; }
+  return true;
+}
+
+/* save order to localStorage orders list */
+function saveOrderObject(order){
+  const raw = localStorage.getItem('mazen_orders');
+  const arr = raw ? JSON.parse(raw) : [];
+  arr.push(order);
+  localStorage.setItem('mazen_orders', JSON.stringify(arr));
+  // persist order counter
+  localStorage.setItem('mazen_order_counter', String(order.orderId));
+}
+
+/* confirm & save order then show confirmation overlay */
+function confirmAndSend(){
+  if(!validateInputs()) return;
+  const link = document.getElementById('orderLinkAuto').value.trim();
+  const qty = Number(document.getElementById('orderQty').value || 0);
+  const code = document.getElementById('transferCodeAuto').value.trim();
+  const pay = document.getElementById('paymentMethodAuto').value;
+  // compute total
+  const basePer1000 = pricePer1000SYP(currentPriceUSD);
+  const total = Math.ceil((qty/1000) * basePer1000);
+  // generate id
+  const id = ++orderCounter;
+  // create order object
+  const service = SERVICES.find(x=>x.id === currentServiceId) || {title: '—'};
+  const orderObj = {
+    orderId: id,
+    serviceId: currentServiceId,
+    serviceTitle: service.title,
+    qty: qty,
+    total_lira: total,
+    link: link,
+    transfer_code: code,
+    payment_method: pay,
+    status: 'قيد المراجعة',
+    created_at: new Date().toISOString()
+  };
+  // save last fields for convenience
+  localStorage.setItem('mazen_last_order', JSON.stringify({qty, link, code, method: pay}));
+  // save order in list
+  saveOrderObject(orderObj);
+  // play sound
+  try{ document.getElementById('successSound').currentTime = 0; document.getElementById('successSound').play(); }catch(e){}
+  // show confirmation overlay
+  const confirmHTML = `
+    <h2 style="margin-top:0;margin-bottom:12px;color:var(--success)">✔ تم استلام طلبك</h2>
+    <div class="status-box">الحالة: <strong>${orderObj.status}</strong></div>
+    <div style="text-align:right;line-height:1.9;margin-top:12px;font-size:15px">
+      <b>المعرف:</b> <span style="color:var(--accent-cta)">${orderObj.orderId}</span><br>
+      <b>الخدمة:</b> ${esc(orderObj.serviceTitle)}<br>
+      <b>الرابط:</b> ${esc(orderObj.link)}<br>
+      <b>الكمية:</b> ${orderObj.qty.toLocaleString()}<br>
+      <b>التكلفة:</b> ${orderObj.total_lira.toLocaleString()} ل.س
+    </div>
+    <div style="margin-top:14px;font-size:13px;color:var(--muted)">احتفظ بالمعرف لتتبع حالة الطلب لاحقًا.</div>
+    <button onclick="sendWA(${orderObj.orderId})"
+      style="margin-top:18px;padding:12px 20px;border:none;border-radius:10px;background:#25D366;color:#032;font-size:16px;cursor:pointer;width:100%">متابعة إلى واتساب لإرسال التفاصيل</button>
+  `;
+  document.getElementById('confirmCard').innerHTML = confirmHTML;
+  document.getElementById('confirmBox').style.display = 'flex';
+  document.getElementById('confirmBox').setAttribute('aria-hidden','false');
+  // close modal (but keep confirm open)
+  document.getElementById('orderModal').style.display = 'none';
+  document.getElementById('orderModal').setAttribute('aria-hidden','true');
+}
+
+/* send to WhatsApp using saved order (find by id) */
+function sendWA(orderId){
+  const arr = JSON.parse(localStorage.getItem('mazen_orders') || '[]');
+  const o = arr.find(x=>x.orderId === orderId);
+  if(!o){
+    alert('خطأ: لم نتمكن من العثور على الطلب لإرساله.');
+    return;
+  }
+  const paymentInfo = o.payment_method === 'syr' ? `سيريتل كاش: ${SYRITEL_NUMBER}` : `شام كاش (كود): ${SHAM_CODE}`;
+  const msg = `📝 طلب جديد\n\n`+
+              `🆔 المعرف: ${o.orderId}\n`+
+              `🔧 الخدمة: ${o.serviceTitle}\n`+
+              `🔢 الكمية: ${o.qty}\n`+
+              `💰 التكلفة: ${o.total_lira} ل.س\n`+
+              `📎 الرابط: ${o.link}\n`+
+              `🔑 كود التحويل: ${o.transfer_code}\n`+
+              `💳 الدفع: ${paymentInfo}\n\n(تم تقديم الطلب عبر واجهة MAZEN — الحالة: ${o.status})`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  // hide confirm
+  document.getElementById('confirmBox').style.display = 'none';
+}
+
+/* ================= Status checker (user can input ID and check) ================= */
+function openStatusChecker(){
+  document.getElementById('statusChecker').style.display = 'flex';
+  document.getElementById('statusChecker').setAttribute('aria-hidden','false');
+  document.getElementById('statusOrderId').value = '';
+  document.getElementById('statusResult').style.display = 'none';
+}
+
+function closeStatusChecker(){
+  document.getElementById('statusChecker').style.display = 'none';
+  document.getElementById('statusChecker').setAttribute('aria-hidden','true');
+}
+
+function checkOrderStatus(){
+  const idStr = document.getElementById('statusOrderId').value.trim();
+  if(!idStr){ alert('أدخل معرف الطلب'); return; }
+  const id = Number(idStr);
+  const arr = JSON.parse(localStorage.getItem('mazen_orders') || '[]');
+  const o = arr.find(x=>x.orderId === id);
+  const resultEl = document.getElementById('statusResult');
+  if(!o){
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `<div style="color:var(--muted)">لم نتمكن من العثور على طلب بالمعرف: <strong>${esc(idStr)}</strong></div>`;
+    return;
+  }
+  resultEl.style.display = 'block';
+  resultEl.innerHTML = `
+    <div style="text-align:right;line-height:1.8">
+      <div><b>المعرف:</b> ${o.orderId}</div>
+      <div><b>الخدمة:</b> ${esc(o.serviceTitle)}</div>
+      <div><b>الكمية:</b> ${o.qty.toLocaleString()}</div>
+      <div><b>التكلفة:</b> ${o.total_lira.toLocaleString()} ل.س</div>
+      <div><b>الحالة:</b> ${o.status}</div>
+      <div><b>تاريخ الطلب:</b> ${new Date(o.created_at).toLocaleString()}</div>
+    </div>
+    <div style="margin-top:12px">
+      <button onclick="sendWA(${o.orderId})" class="btn" style="background:#25D366;color:#032;padding:9px 12px;border-radius:10px">إرسال التفاصيل إلى واتساب</button>
+    </div>
+  `;
+}
+
+/* close overlays on outside click or ESC */
+document.addEventListener('click', (e)=>{
+  const confirmBox = document.getElementById('confirmBox');
+  if(confirmBox.style.display === 'flex' && e.target === confirmBox) confirmBox.style.display = 'none';
+  const statusBox = document.getElementById('statusChecker');
+  if(statusBox.style.display === 'flex' && e.target === statusBox) statusBox.style.display = 'none';
+});
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){
+    if(document.getElementById('confirmBox').style.display === 'flex') document.getElementById('confirmBox').style.display = 'none';
+    else if(document.getElementById('statusChecker').style.display === 'flex') document.getElementById('statusChecker').style.display = 'none';
+    else closeOrder();
+  }
+});
+
+/* ==================== Effects (particles, snow, cursor) ==================== */
+const EFFECTS = { snow:true, particles:true, cursorGlow:true, tilt:true, neonLines:true };
+
+/* cursor glow */
+const cursorEl = document.getElementById('cursorFollow');
+if(EFFECTS.cursorGlow){
+  document.addEventListener('mousemove', (e)=>{
+    cursorEl.style.left = e.clientX + 'px';
+    cursorEl.style.top = e.clientY + 'px';
+    cursorEl.style.width = '24px'; cursorEl.style.height = '24px';
+  });
+  document.addEventListener('mousedown', ()=>{ cursorEl.style.transform = 'translate(-50%,-50%) scale(.8)'; });
+  document.addEventListener('mouseup', ()=>{ cursorEl.style.transform = 'translate(-50%,-50%) scale(1)'; });
+} else cursorEl.style.display = 'none';
+
+/* particles */
+(function ParticleSystem(){
+  if(!EFFECTS.particles) return;
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const particles = [];
+  const COUNT = Math.max(30, Math.floor(w/60));
+  for(let i=0;i<COUNT;i++){
+    particles.push({
+      x: Math.random()*w, y: Math.random()*h, r: 0.6 + Math.random()*1.6,
+      vx: (Math.random()*0.6)-0.3, vy: (Math.random()*0.2)+0.05, a: 0.05 + Math.random()*0.2
+    });
+  }
+  window.addEventListener('resize', ()=>{ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+  let t=0;
+  function loop(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of particles){
+      p.x += p.vx + Math.sin((t+p.x)/200)*0.2;
+      p.y += p.vy;
+      if(p.y > h + 5){ p.y = -10; p.x = Math.random()*w; }
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    t++;
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* snow sparkles */
+(function SnowSparkles(){
+  if(!EFFECTS.snow) return;
+  const canvas = document.getElementById('snowCanvas');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const flakes = [];
+  const COUNT = Math.max(40, Math.floor(w/40));
+  for(let i=0;i<COUNT;i++){
+    flakes.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.6+0.6, vy: 0.15 + Math.random()*0.5, vx: (Math.random()*0.4)-0.2, alpha: 0.35 + Math.random()*0.5 });
+  }
+  window.addEventListener('resize', ()=>{ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const f of flakes){
+      f.x += f.vx + Math.sin(f.y/80)*0.1;
+      f.y += f.vy;
+      if(f.y > h + 5){ f.y = -10; f.x = Math.random()*w; }
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,255,255,${f.alpha})`;
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+      ctx.fill();
+      if(Math.random() > 0.997){
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.arc(f.x + (Math.random()*6-3), f.y + (Math.random()*6-3), f.r*0.8, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* header blur on scroll */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', ()=>{ const s = window.scrollY; if(s > 30) header.classList.add('scrolled'); else header.classList.remove('scrolled'); });
+
+/* ==================== Skeleton loader -> show ==================== */
+function showSkeletonThenLoad(){
+  document.getElementById('skeletonArea').style.display = 'grid';
+  document.getElementById('servicesContainer').style.display = 'none';
+  setTimeout(()=>{
+    document.getElementById('skeletonArea').style.display = 'none';
+    document.getElementById('servicesContainer').style.display = 'grid';
+    buildCategories();
+    renderServices();
+  }, 700);
+}
+showSkeletonThenLoad();
+
+/* theme toggle */
+let currentTheme = 'dark';
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  if(currentTheme === 'dark'){
+    document.documentElement.style.setProperty('--bg','#f6f8fb');
+    document.documentElement.style.setProperty('--muted','#556677');
+    document.documentElement.style.setProperty('--text','#071122');
+    currentTheme = 'light';
+    document.getElementById('themeToggle').innerText = '🌙';
+  } else {
+    location.reload();
+  }
+});
+
+/* small helpers */
+function escapeQuotes(str){ if(!str) return ''; return String(str).replace(/'/g,"\\'").replace(/\n/g,' '); }
+
+</script>
+</body>
+</html>
